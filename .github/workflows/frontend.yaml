@@ -22,6 +22,7 @@ jobs:
       - run: npm run build --if-present
   cd:
     needs: ci
+    if: github.repository == 'mowblox/auditable-blockchain-voting-system'
     runs-on: ubuntu-latest
     defaults:
       run:
