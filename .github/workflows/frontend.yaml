@@ -1,0 +1,39 @@
+name: Frontend CI/CD
+env:
+  VERCEL_ORG_ID: team_GXgJz62Ree8hraZWXLQCT3zP
+  VERCEL_PROJECT_ID: prj_9nd00LMznZnak43p5ZXe8alzVYwW
+
+on: [push]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - run: npm install
+      - run: npm run lint
+      - run: npm run build --if-present
+  cd:
+    needs: ci
+    if: github.repository == 'mowblox/auditable-blockchain-voting-system'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
