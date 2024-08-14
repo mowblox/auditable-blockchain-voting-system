@@ -1,0 +1,21 @@
+name: Blockchain CI/CD
+
+env:
+  PRIVATE_KEY: SmxyrBPnBDM0uhl2g0zcWL7hSI8Yh5KS
+
+on: [push]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup and run tests using Node.js ${{ matrix.node-version }}
+      working-directory: ./blockchain
+      run: |
+          npm install
+          npm run test
+          npm run coverage
