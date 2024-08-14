@@ -1,0 +1,38 @@
+name: Frontend CI/CD
+env:
+  VERCEL_ORG_ID: team_GXgJz62Ree8hraZWXLQCT3zP
+  VERCEL_PROJECT_ID: prj_HogieicwLGgliRU3gYo5UNy6E2BB
+
+on: [push]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup and run tests using Node.js ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm run lint
+    - run: npm run build --if-present
+  cd:
+    needs: ci
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
