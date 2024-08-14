@@ -1,7 +1,7 @@
 name: Frontend CI/CD
 env:
   VERCEL_ORG_ID: team_GXgJz62Ree8hraZWXLQCT3zP
-  VERCEL_PROJECT_ID: prj_HogieicwLGgliRU3gYo5UNy6E2BB
+  VERCEL_PROJECT_ID: prj_9nd00LMznZnak43p5ZXe8alzVYwW
 
 on: [push]
 
