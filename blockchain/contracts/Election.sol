@@ -61,4 +61,13 @@ contract Election {
         candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
     }
     
+    //function to get all candidates
+    function getCandidates() public view returns (Candidate[] memory) {
+        Candidate[] memory allCandidates = new Candidate[](candidatesCount);
+        for (uint i = 1; i <= candidatesCount; i++) {
+            allCandidates[i - 1] = candidates[i];
+        }
+        return allCandidates;
+    }
+    
 }
