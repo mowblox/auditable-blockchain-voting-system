@@ -5,8 +5,8 @@ contract Election {
     string public title;
     string public description;
     bool public isPublic;
-    uint public start_date;
-    uint public end_date;
+    uint public startDate;
+    uint public endDate;
 
     // variable for keeping the number of candidates in election, increases when a new candidate is added
     uint public candidatesCount;
@@ -24,9 +24,9 @@ contract Election {
     }
 
     //creates mapping to map a unique candidate Id to a Candidate struct
-    mapping(uint => Candidate) public candidates;
+    mapping(uint => Candidate) candidates;
     // also to tie/map a unique blockchain adresss to a voter
-    mapping(address => Voter) public voters;
+    mapping(address => Voter) voters;
 
     // event to be emitted when a voter casts a vote
     event VoteCast(address indexed voter, uint indexed candidateId);
@@ -35,21 +35,21 @@ contract Election {
         string memory _title,
         string memory _description,
         bool _isPublic,
-        uint _start_date,
-        uint _end_date
+        uint _startDate,
+        uint _endDate
     ) {
-        require(_start_date < _end_date, "Start date must be before end date");
+        require(_startDate < _endDate, "Start date must be before end date");
         title = _title;
         description = _description;
         isPublic = _isPublic;
-        start_date = _start_date;
-        end_date = _end_date;
+        startDate = _startDate;
+        endDate = _endDate;
     }
 
     // Modifier to ensure the election is active
     modifier onlyWhileOpen() {
-        require(block.timestamp >= start_date, "Election has not started yet");
-        require(block.timestamp <= end_date, "Election has ended");
+        require(block.timestamp >= startDate, "Election has not started yet");
+        require(block.timestamp <= endDate, "Election has ended");
         _;
     }
 
