@@ -83,4 +83,19 @@ contract Election {
         return (voter.hasVoted, voter.candidateId);
     }
     
+    //function to cast a vote
+    function castVote(uint _candidateId) public onlyWhileOpen {
+        require(!voters[msg.sender].hasVoted, "You have already voted.");
+        require(
+            _candidateId > 0 && _candidateId <= candidatesCount,
+            "Invalid candidate. Please enter a valid candidate ID"
+        );
+
+        voters[msg.sender].hasVoted = true;
+        voters[msg.sender].candidateId = _candidateId;
+
+        candidates[_candidateId].voteCount++;
+
+        emit VoteCast(msg.sender, _candidateId);
+    }
 }
