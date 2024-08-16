@@ -52,4 +52,13 @@ contract Election {
         require(block.timestamp <= endDate, "Election has ended");
         _;
     }
+
+    // function to create a new candidate
+    function addCandidate(string memory _name) public onlyWhileOpen {
+        // increamented to assign a new id to a candidate
+        candidatesCount++;
+        // a new candidate struct is created and stored in the candiates mapping
+        candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
+    }
+    
 }
