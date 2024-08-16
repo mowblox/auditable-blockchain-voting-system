@@ -22,4 +22,9 @@ contract Election {
         bool hasVoted;
         uint candidateId;
     }
+
+    //creates mapping to map a unique candidate Id to a Candidate struct
+    mapping(uint => Candidate) public candidates;
+    // also to tie/map a unique blockchain adresss to a voter
+    mapping(address => Voter) public voters;
 }
