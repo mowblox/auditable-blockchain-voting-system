@@ -77,4 +77,10 @@ contract Election {
     }
 
     
+    //function to get a voter by their Address
+    function getVoter(address _voterAddress) public view returns (bool, uint) {
+        Voter memory voter = voters[_voterAddress];
+        return (voter.hasVoted, voter.candidateId);
+    }
+    
 }
