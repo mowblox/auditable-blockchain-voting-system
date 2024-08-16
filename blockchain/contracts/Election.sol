@@ -69,5 +69,12 @@ contract Election {
         }
         return allCandidates;
     }
+
+      // Function to add a voter to the election
+    function addVoter(address _voterAddress) public onlyWhileOpen {
+        require(!voters[_voterAddress].hasVoted, "Voter is already registered");
+        voters[_voterAddress] = Voter(false, 0);
+    }
+
     
 }
