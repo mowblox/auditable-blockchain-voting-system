@@ -42,7 +42,14 @@ contract Election {
         title = _title;
         description = _description;
         isPublic = _isPublic;
-        start_date = _start_date;
-        end_date = _end_date;
+        start_date = _startDate;
+        end_date = _endDate;
+    }
+
+    // Modifier to ensure the election is active
+    modifier onlyWhileOpen() {
+        require(block.timestamp >= startDate, "Election has not started yet");
+        require(block.timestamp <= endDate, "Election has ended");
+        _;
     }
 }
