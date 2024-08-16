@@ -5,8 +5,8 @@ contract Election {
     string public title;
     string public description;
     bool public isPublic;
-    string public start_date;
-    string public end_date;
+    uint public start_date;
+    uint public end_date;
 
     // variable for keeping the number of candidates in election, increases when a new candidate is added
     uint public candidatesCount;
@@ -35,21 +35,21 @@ contract Election {
         string memory _title,
         string memory _description,
         bool _isPublic,
-        string _start_date,
-        string _end_date,
+        uint _start_date,
+        uint _end_date
     ) {
-        require(_startDate < _endDate, "Start date must be before end date");
+        require(_start_date < _end_date, "Start date must be before end date");
         title = _title;
         description = _description;
         isPublic = _isPublic;
-        start_date = _startDate;
-        end_date = _endDate;
+        start_date = _start_date;
+        end_date = _end_date;
     }
 
     // Modifier to ensure the election is active
     modifier onlyWhileOpen() {
-        require(block.timestamp >= startDate, "Election has not started yet");
-        require(block.timestamp <= endDate, "Election has ended");
+        require(block.timestamp >= start_date, "Election has not started yet");
+        require(block.timestamp <= end_date, "Election has ended");
         _;
     }
 
@@ -60,7 +60,7 @@ contract Election {
         // a new candidate struct is created and stored in the candiates mapping
         candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
     }
-    
+
     //function to get all candidates
     function getCandidates() public view returns (Candidate[] memory) {
         Candidate[] memory allCandidates = new Candidate[](candidatesCount);
@@ -70,19 +70,18 @@ contract Election {
         return allCandidates;
     }
 
-      // Function to add a voter to the election
+    // Function to add a voter to the election
     function addVoter(address _voterAddress) public onlyWhileOpen {
         require(!voters[_voterAddress].hasVoted, "Voter is already registered");
         voters[_voterAddress] = Voter(false, 0);
     }
 
-    
     //function to get a voter by their Address
     function getVoter(address _voterAddress) public view returns (bool, uint) {
         Voter memory voter = voters[_voterAddress];
         return (voter.hasVoted, voter.candidateId);
     }
-    
+
     //function to cast a vote
     function castVote(uint _candidateId) public onlyWhileOpen {
         require(!voters[msg.sender].hasVoted, "You have already voted.");
