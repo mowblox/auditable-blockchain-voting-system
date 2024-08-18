@@ -1,11 +1,18 @@
+import Image from "next/image";
+
 
 export default function Header() {
   return (
     <header>
       <nav className="bg-dark px-4 lg:px-6 py-2.5 ">
         <div className="flex justify-between items-center mx-auto max-w-screen-xl">
-          <a href="/" className="flex items-center">
-            <img src="/images/logo.png" className="mr-3 h-6 sm:h-9" alt="Logo" />
+          <a href="/">
+            <Image
+              src="/images/logo.png"
+              alt="Logo"
+              width={100}
+              height={36}
+            />
           </a>
           <div className="flex items-center lg:order-2">
             <a href="#" className="text-subtle-text font-medium text-sm px-4">election</a>
