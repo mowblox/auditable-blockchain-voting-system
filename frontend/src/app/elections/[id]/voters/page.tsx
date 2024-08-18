@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import AddVoters from "./components/AddVoters";
 
 export const metadata: Metadata = {
   title: "ABVS | Election Voters",
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
 export default function ElectionVoters() {
   return (
     <div>
-      <div>Add Voters Component goes here</div>
+      <AddVoters />
       <div>List or Table of Already Added Voters</div>
     </div>
   );
