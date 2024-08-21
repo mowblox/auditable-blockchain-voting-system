@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function Landing() {
   return (
-    <div className="relative">
+    <div className="relative pb-52">
       <img
         src={heroIcon.src}
         alt="hero"
@@ -38,10 +38,10 @@ export default function Landing() {
           </p>
           <div className="gap-4 md:gap-6 lg:gap-8 flex justify-center mt-6">
             <button className="py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer">
-              create Election
+              create election
             </button>
             <button className="bg-dark border border-white py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] hover:bg-[#939393] cursor-pointer">
-              cast Vote
+              cast vote
             </button>
           </div>
         </div>
