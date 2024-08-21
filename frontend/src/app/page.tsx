@@ -100,7 +100,7 @@ export default function Landing() {
             className="self-center w-[200px] md:w-[250px] lg:w-[300px] mb-8 lg:mb-0"
           />
           <div className="w-full lg:w-[55%] text-end relative">
-            <h3 className="text-center text-[28px] md:text-[32px] lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
+            <h3 className="text-center text-[28px] md:text-[32px] lg:text-end lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
               Initiate and Vote on Proposals
             </h3>
             <Image
@@ -110,7 +110,7 @@ export default function Landing() {
               alt="blue-underline"
               className=" w-[120px] hidden lg:block md:w-[150px] lg:w-[180px] right-0 absolute"
             />
-            <p className="text-center text-subtle-text mt-4 md:mt-10 lg:mt-14 text-sm md:text-base lg:text-lg">
+            <p className="text-center lg:text-end text-subtle-text mt-4 md:mt-10 lg:mt-14 text-sm md:text-base lg:text-lg">
               Propose new ideas, projects, or initiatives, and securely cast
               your vote on matters that impact your community.
             </p>
@@ -127,17 +127,17 @@ export default function Landing() {
           />
           <div className="flex flex-col lg:flex-row w-[90%] lg:w-[80%] m-auto justify-between">
             <div className="w-full lg:w-[50%] mb-8 lg:mb-0">
-              <h3 className="text-[28px] md:text-[32px] lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
+              <h3 className="text-[28px] md:text-[32px] text-center lg:text-start lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
                 Track and Verify Results
               </h3>
               <Image
                 src={blueUnderline.src}
-                width={blueUnderline.width} // Add width
+                width={blueUnderline.width}
                 height={blueUnderline.height}
                 alt="blue-underline"
                 className="w-[120px] hidden lg:block md:w-[150px] lg:w-[180px]"
               />
-              <p className="text-subtle-text mt-4 md:mt-6 lg:mt-8 text-sm md:text-base lg:text-lg">
+              <p className="text-subtle-text text-center lg:text-start mt-4 md:mt-6 lg:mt-8 text-sm md:text-base lg:text-lg">
                 Maintain complete transparency with real-time voting updates and
                 an immutable record of all decisions.
               </p>
