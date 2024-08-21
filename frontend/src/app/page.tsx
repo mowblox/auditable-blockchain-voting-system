@@ -23,67 +23,79 @@ export default function Landing() {
         className="w-full h-auto object-cover absolute -z-10 opacity-85"
       />
       <div className="flex justify-center items-center h-[100vh]">
-        <div className="w-[55%] justify-center text-center">
-          <h2 className="font-space-grotesk font-bold text-[52px] gradient-text">
+        <div className="w-[90%] md:w-[70%] lg:w-[55%] justify-center text-center">
+          <h2 className="font-space-grotesk font-bold text-[32px] md:text-[42px] lg:text-[52px] gradient-text">
             Decentralized Democracy for Everyone
           </h2>
           <img
             src={underline.src}
             alt="underline"
-            className="w-[300px] mx-auto "
+            className="w-[150px] md:w-[200px] lg:w-[300px] mx-auto"
           />
-          <p className="w-[80%] m-auto mt-6 text-subtle-text">
+          <p className="w-[90%] md:w-[80%] m-auto mt-6 text-sm md:text-base lg:text-lg text-subtle-text">
             By transforming your group into a mini DAO, you can harness the
             power of decentralization to make informed decisions collectively.
           </p>
-          <div className="gap-8 flex justify-center mt-6">
-            <button className="py-2 px-6 rounded-3xl w-[180px] bg-gradient-to-r from-primary to-[#4595DF]">
+          <div className="gap-4 md:gap-6 lg:gap-8 flex justify-center mt-6">
+            <button className="py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer">
               create Election
             </button>
-            <button className="bg-dark border border-white py-2 px-6 rounded-3xl w-[180px]">
+            <button className="bg-dark border border-white py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] hover:bg-[#939393] cursor-pointer">
               cast Vote
             </button>
           </div>
         </div>
       </div>
-      <div className="justify-center flex flex-col gap-60">
-        <h3 className="font-space-grotesk text-center font-bold text-[26px]">
+      <div className="justify-center flex flex-col gap-16 md:gap-40 lg:gap-60">
+        <h3 className="font-space-grotesk text-center font-bold text-[20px] md:text-[24px] lg:text-[26px]">
           What you can do with ABVS
         </h3>
 
         <div className="relative">
-          <img src={gradient.src} alt="gradient" className="absolute left-0" />
-          <div className="flex w-[80%] m-auto justify-between">
-            <div className="w-[50%]">
-              <h3 className="text-[38px] font-bold font-space-grotesk gradient-text-vertical">
+          <img
+            src={gradient.src}
+            alt="gradient"
+            className="absolute left-0 w-[100px] md:w-[150px] lg:w-auto"
+          />
+          <div className="flex flex-col text-center lg:flex-row lg:text-start w-[90%] lg:w-[80%] m-auto justify-between">
+            <div className="w-full lg:w-[50%] mb-8 lg:mb-0">
+              <h3 className="text-[28px] md:text-[32px] lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
                 Create Your Mini DAO
               </h3>
               <img
                 src={blueUnderline.src}
                 alt="blue-underline"
-                className="w-[180px]"
+                className="w-[120px] hidden lg:block md:w-[150px] self-center lg:w-[180px]"
               />
-              <p className="text-subtle-text mt-8">
+              <p className="text-subtle-text mt-4 md:mt-6 lg:mt-8 text-sm md:text-base lg:text-lg">
                 Easily establish a decentralized autonomous organization
                 tailored to your group's specific needs and goals.
               </p>
             </div>
-            <img src={handsup.src} alt="handsup" />
+            <img
+              src={handsup.src}
+              alt="handsup"
+              className=" self-center w-[200px] md:w-[250px] lg:w-[300px]"
+            />
           </div>
         </div>
 
-        <div className="w-[80%] m-auto flex justify-between">
-          <img src={callout.src} alt="handsup" />
-          <div className="w-[55%] text-end relative">
-            <h3 className="text-[38px] font-bold font-space-grotesk gradient-text-vertical">
+        <div className="w-[90%] lg:w-[80%] m-auto flex flex-col-reverse lg:flex-row justify-between">
+          <img
+            src={callout.src}
+            alt="handsup"
+            className="self-center w-[200px] md:w-[250px] lg:w-[300px] mb-8 lg:mb-0"
+          />
+          <div className="w-full lg:w-[55%] text-end relative">
+            <h3 className="text-center text-[28px] md:text-[32px] lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
               Initiate and Vote on Proposals
             </h3>
             <img
               src={blueUnderline.src}
               alt="blue-underline"
-              className="w-[180px] right-0 absolute"
+              className=" w-[120px] hidden lg:block md:w-[150px] lg:w-[180px] right-0 absolute"
             />
-            <p className="text-subtle-text mt-14">
+            <p className="text-center text-subtle-text mt-4 md:mt-10 lg:mt-14 text-sm md:text-base lg:text-lg">
               Propose new ideas, projects, or initiatives, and securely cast
               your vote on matters that impact your community.
             </p>
@@ -94,44 +106,56 @@ export default function Landing() {
           <img
             src={cardGradient.src}
             alt="gradient"
-            className="absolute right-0"
+            className="absolute right-0 w-[100px] md:w-[150px] lg:w-auto"
           />
-          <div className="flex w-[80%] m-auto justify-between">
-            <div className="w-[50%]">
-              <h3 className="text-[38px] font-bold font-space-grotesk gradient-text-vertical">
+          <div className="flex flex-col lg:flex-row w-[90%] lg:w-[80%] m-auto justify-between">
+            <div className="w-full lg:w-[50%] mb-8 lg:mb-0">
+              <h3 className="text-[28px] md:text-[32px] lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
                 Track and Verify Results
               </h3>
               <img
                 src={blueUnderline.src}
                 alt="blue-underline"
-                className="w-[180px]"
+                className="w-[120px] hidden lg:block md:w-[150px] lg:w-[180px]"
               />
-              <p className="text-subtle-text mt-8">
+              <p className="text-subtle-text mt-4 md:mt-6 lg:mt-8 text-sm md:text-base lg:text-lg">
                 Maintain complete transparency with real-time voting updates and
                 an immutable record of all decisions.
               </p>
             </div>
-            <img src={king.src} alt="handsup" className="w-[20%]" />
+            <img
+              src={king.src}
+              alt="handsup"
+              className="self-center w-[200px] md:w-[250px] lg:w-[300px]"
+            />
           </div>
         </div>
 
         <div className="relative">
-          <img src={gradient2.src} alt="gradient" className="absolute left-0" />
-          <div className="flex w-[80%] m-auto justify-between border  border-primary rounded-3xl">
-            <div className="w-[55%] flex flex-col gap-4 py-28  pl-32">
-              <h3 className="text-[38px] font-bold font-space-grotesk gradient-text">
+          <img
+            src={gradient2.src}
+            alt="gradient"
+            className="absolute left-0 w-[100px] md:w-[150px] lg:w-auto"
+          />
+          <div className="flex flex-col lg:flex-row w-[90%] lg:w-[80%] m-auto justify-between border  border-primary rounded-3xl">
+            <div className="w-full lg:w-[55%] flex flex-col gap-4 py-14 md:py-20 lg:py-28 pl-6 md:pl-16 lg:pl-32">
+              <h3 className="text-[28px] md:text-[32px] lg:text-[38px] font-bold font-space-grotesk gradient-text">
                 More than just a voting platform
               </h3>
-              <p className="text-subtle-text">
+              <p className="text-subtle-text text-sm md:text-base lg:text-lg">
                 Propose new ideas, projects, or initiatives, and securely cast
                 your vote on matters that impact your community.
               </p>
-              <button className="py-4 px-6 rounded-3xl w-[180px] bg-gradient-to-r from-primary to-[#4595DF]">
+              <button className="py-2 md:py-4 px-4 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#a9bcce] hover:to-primary cursor-pointer">
                 Get started
               </button>
             </div>
             <div className="flex w-auto justify-end items-end">
-              <img src={smile.src} alt="smile" className="w-[60%]" />
+              <img
+                src={smile.src}
+                alt="smile"
+                className="w-[200px] md:w-[250px] lg:w-[300px]"
+              />
             </div>
           </div>
         </div>
