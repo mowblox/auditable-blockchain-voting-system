@@ -78,7 +78,7 @@ export default function Landing() {
               />
               <p className="text-subtle-text mt-4 md:mt-6 lg:mt-8 text-sm md:text-base lg:text-lg">
                 Easily establish a decentralized autonomous organization
-                tailored to your group's specific needs and goals.
+                tailored to your group&rsquo;s specific needs and goals.
               </p>
             </div>
             <Image
