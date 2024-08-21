@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import heroIcon from "../../public/images/hero-bg.png";
 import underline from "../../public/images/white-underline.png";
 import handsup from "../../public/images/hands-up-illus.png";
@@ -17,8 +18,10 @@ export const metadata: Metadata = {
 export default function Landing() {
   return (
     <div className="relative pb-52">
-      <img
+      <Image
         src={heroIcon.src}
+        width={heroIcon.width} // Add width
+        height={heroIcon.height}
         alt="hero"
         className="w-full h-auto object-cover absolute -z-10 opacity-85"
       />
@@ -27,8 +30,10 @@ export default function Landing() {
           <h2 className="font-space-grotesk font-bold text-[32px] md:text-[42px] lg:text-[52px] gradient-text">
             Decentralized Democracy for Everyone
           </h2>
-          <img
+          <Image
             src={underline.src}
+            width={underline.width} // Add width
+            height={underline.height}
             alt="underline"
             className="w-[150px] md:w-[200px] lg:w-[300px] mx-auto"
           />
@@ -52,8 +57,10 @@ export default function Landing() {
         </h3>
 
         <div className="relative">
-          <img
+          <Image
             src={gradient.src}
+            width={gradient.width}
+            height={gradient.height}
             alt="gradient"
             className="absolute left-0 w-[100px] md:w-[150px] lg:w-auto"
           />
@@ -62,8 +69,10 @@ export default function Landing() {
               <h3 className="text-[28px] md:text-[32px] lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
                 Create Your Mini DAO
               </h3>
-              <img
+              <Image
                 src={blueUnderline.src}
+                width={blueUnderline.width}
+                height={blueUnderline.height}
                 alt="blue-underline"
                 className="w-[120px] hidden lg:block md:w-[150px] self-center lg:w-[180px]"
               />
@@ -72,8 +81,10 @@ export default function Landing() {
                 tailored to your group's specific needs and goals.
               </p>
             </div>
-            <img
+            <Image
               src={handsup.src}
+              width={handsup.width}
+              height={handsup.height}
               alt="handsup"
               className=" self-center w-[200px] md:w-[250px] lg:w-[300px]"
             />
@@ -81,8 +92,10 @@ export default function Landing() {
         </div>
 
         <div className="w-[90%] lg:w-[80%] m-auto flex flex-col-reverse lg:flex-row justify-between">
-          <img
+          <Image
             src={callout.src}
+            width={callout.width} // Add width
+            height={callout.height}
             alt="handsup"
             className="self-center w-[200px] md:w-[250px] lg:w-[300px] mb-8 lg:mb-0"
           />
@@ -90,8 +103,10 @@ export default function Landing() {
             <h3 className="text-center text-[28px] md:text-[32px] lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
               Initiate and Vote on Proposals
             </h3>
-            <img
+            <Image
               src={blueUnderline.src}
+              width={blueUnderline.width} // Add width
+              height={blueUnderline.height}
               alt="blue-underline"
               className=" w-[120px] hidden lg:block md:w-[150px] lg:w-[180px] right-0 absolute"
             />
@@ -103,8 +118,10 @@ export default function Landing() {
         </div>
 
         <div className="relative">
-          <img
+          <Image
             src={cardGradient.src}
+            width={cardGradient.width} // Add width
+            height={cardGradient.height}
             alt="gradient"
             className="absolute right-0 w-[100px] md:w-[150px] lg:w-auto"
           />
@@ -113,8 +130,10 @@ export default function Landing() {
               <h3 className="text-[28px] md:text-[32px] lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
                 Track and Verify Results
               </h3>
-              <img
+              <Image
                 src={blueUnderline.src}
+                width={blueUnderline.width} // Add width
+                height={blueUnderline.height}
                 alt="blue-underline"
                 className="w-[120px] hidden lg:block md:w-[150px] lg:w-[180px]"
               />
@@ -123,8 +142,10 @@ export default function Landing() {
                 an immutable record of all decisions.
               </p>
             </div>
-            <img
+            <Image
               src={king.src}
+              width={king.width}
+              height={king.height}
               alt="handsup"
               className="self-center w-[200px] md:w-[250px] lg:w-[300px]"
             />
@@ -132,8 +153,10 @@ export default function Landing() {
         </div>
 
         <div className="relative">
-          <img
+          <Image
             src={gradient2.src}
+            width={gradient2.width}
+            height={gradient2.height}
             alt="gradient"
             className="absolute left-0 w-[100px] md:w-[150px] lg:w-auto"
           />
@@ -151,8 +174,10 @@ export default function Landing() {
               </button>
             </div>
             <div className="flex w-auto justify-end items-end">
-              <img
+              <Image
                 src={smile.src}
+                width={smile.width}
+                height={smile.height}
                 alt="smile"
                 className="w-[200px] md:w-[250px] lg:w-[300px]"
               />
