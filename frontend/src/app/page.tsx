@@ -127,17 +127,17 @@ export default function Landing() {
           />
           <div className="flex flex-col lg:flex-row w-[90%] lg:w-[80%] m-auto justify-between">
             <div className="w-full lg:w-[50%] mb-8 lg:mb-0">
-              <h3 className="text-[28px] md:text-[32px] lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
+              <h3 className="text-[28px] md:text-[32px] text-center lg:text-[38px] font-bold font-space-grotesk gradient-text-vertical">
                 Track and Verify Results
               </h3>
               <Image
                 src={blueUnderline.src}
-                width={blueUnderline.width} // Add width
+                width={blueUnderline.width}
                 height={blueUnderline.height}
                 alt="blue-underline"
                 className="w-[120px] hidden lg:block md:w-[150px] lg:w-[180px]"
               />
-              <p className="text-subtle-text mt-4 md:mt-6 lg:mt-8 text-sm md:text-base lg:text-lg">
+              <p className="text-subtle-text text-center mt-4 md:mt-6 lg:mt-8 text-sm md:text-base lg:text-lg">
                 Maintain complete transparency with real-time voting updates and
                 an immutable record of all decisions.
               </p>
