@@ -63,6 +63,14 @@ contract ElectionFactory {
     delete elections[_electionID];
   }
 
+
+  //Function to retrieve the total number of elections
+  function getTotalElections() public view returns (uint) {
+    return elections.length;
+  }
+
+
+
 }
 
 
