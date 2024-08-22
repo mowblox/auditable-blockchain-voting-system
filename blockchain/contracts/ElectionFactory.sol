@@ -4,8 +4,18 @@ pragma solidity ^0.8.24;
 import "./Election.sol";
 
 contract ElectionFactory {
+  address public owner;
   //Array ti keep track of the elections
   address[] public elections;
+
+  constructor (){
+    owner = msg.sender;
+  }
+
+   modifier onlyOwner() {
+        require(msg.sender == owner, "You are not the owner");
+        _;
+    }
 
   //Event emitted when an election is created
   event ElectionCreated(address electionAddress);
@@ -46,6 +56,11 @@ contract ElectionFactory {
     Election election = Election(elections[_electionID]);
     return (election.title(), election.description(), election.isPublic(), election.startDate(), election.endDate());
 
+  }
+
+  //function to delete an election
+  function deleteElection(uint _electionID) public onlyOwner {
+    delete elections[_electionID];
   }
 
 }
