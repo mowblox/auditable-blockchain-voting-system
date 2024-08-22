@@ -40,6 +40,14 @@ contract ElectionFactory {
     return elections;
   }
 
+  //Below are other functions that I think should be added
+  //function to get election by ID
+  function getElectionDetails(uint _electionID) public view returns (string memory, string memory, bool, uint , uint){
+    Election election = Election(elections[_electionID]);
+    return (election.title(), election.description(), election.isPublic(), election.startDate(), election.endDate());
+
+  }
+
 }
 
 
