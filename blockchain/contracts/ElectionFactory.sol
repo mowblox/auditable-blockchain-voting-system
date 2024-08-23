@@ -4,9 +4,10 @@ pragma solidity ^0.8.24;
 import "./Election.sol";
 
 contract ElectionFactory {
-  address public owner;
-  //Array ti keep track of the elections
-  address[] public elections;
+  address  owner;
+  
+  //Array to keep track of the elections
+  address[]  elections;
 
   constructor (){
     owner = msg.sender;
@@ -50,13 +51,7 @@ contract ElectionFactory {
     return elections;
   }
 
-  //Below are other functions that I think should be added
-  //function to get election by ID
-  function getElectionDetails(uint _electionID) public view returns (string memory, string memory, bool, uint , uint){
-    Election election = Election(elections[_electionID]);
-    return (election.title(), election.description(), election.isPublic(), election.startDate(), election.endDate());
 
-  }
 
   //function to delete an election
   function deleteElection(uint _electionID) public onlyOwner {
