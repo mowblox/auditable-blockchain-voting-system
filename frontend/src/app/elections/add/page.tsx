@@ -28,7 +28,7 @@ export default function AddElection() {
 
   return (
     <div className="h-full px-4 lg:px-0">
-      <div className="ml-[5%] flex flex-col lg:flex-row mt-14 gap-14">
+      <div className="md:w-[80%] m-auto flex flex-col lg:flex-row mt-14 gap-14">
         <div className="lg:w-[25%]">
           <h2 className="gradient-text font-bold text-[32px] lg:text-[45px] font-space-grotesk leading-tight">
             Let’s create an election
@@ -80,7 +80,7 @@ function Elections() {
             Election Title
           </label>
           <input
-            className="w-full py-3 border-b border-gray-300 bg-[#070707] text-subtle-text placeholder:text-subtle-text focus:border-gray-300 focus:outline-none"
+            className="w-full py-3 border-b border-gray-300 bg-[#070707] text-subtle-text placeholder:text-subtle-text placeholder:text-[12px] lg:placeholder:text-[16px] focus:border-gray-300 focus:outline-none"
             type="text"
             id="title"
             placeholder="Eg. 2024 SRC President - UG"
@@ -95,7 +95,7 @@ function Elections() {
             Description
           </label>
           <textarea
-            className="w-full py-3 border-b border-gray-300 bg-[#070707] text-subtle-text placeholder:text-subtle-text focus:border-gray-300 focus:outline-none"
+            className="w-full py-3 border-b border-gray-300 bg-[#070707] text-subtle-text placeholder:text-subtle-text placeholder:text-[12px] lg:placeholder:text-[16px] focus:border-gray-300 focus:outline-none"
             id="description"
             rows={1}
             placeholder="Write a brief summary about the purpose of the election"
