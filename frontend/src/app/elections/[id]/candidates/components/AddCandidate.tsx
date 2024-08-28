@@ -48,11 +48,14 @@ export default function AddCandidate() {
     index: number
   ) => {
     const { name, files } = event.target;
+    const file = files?.[0] || null;
+    const imageUrl = file ? URL.createObjectURL(file) : null;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [index]: {
         ...prevFormData[index],
-        [name]: files?.[0] || null,
+        [name]: file,
+        preview: imageUrl
       },
     }));
   };
@@ -67,6 +70,7 @@ export default function AddCandidate() {
   // FormComponent definition
   const FormComponent = ({ index }: { index: number }) => {
     const isOpen = openFormPanelIndex === index;
+    const formImagePreview = formData[index]?.preview;
 
     const togglePanel = () => {
       setOpenFormPanelIndex(isOpen ? null : index);
@@ -101,7 +105,7 @@ export default function AddCandidate() {
             <div className="flex flex-col">
               <label
                 htmlFor={`fullname-${index}`}
-                className="text-base font-space-grotesk"
+                className="text-sm md:text-base font-space-grotesk"
               >
                 Full Name
               </label>
@@ -118,7 +122,7 @@ export default function AddCandidate() {
             <div className="flex flex-col">
               <label
                 htmlFor={`team-${index}`}
-                className="text-base font-space-grotesk"
+                className="text-sm md:text-base font-space-grotesk"
               >
                 Team
               </label>
@@ -135,39 +139,49 @@ export default function AddCandidate() {
             <div className="flex flex-col gap-4">
               <label
                 htmlFor={`upload-image-${index}`}
-                className="text-base font-space-grotesk"
+                className="text-sm md:text-base font-space-grotesk"
               >
                 Upload image
               </label>
               <div className="w-full h-44 flex justify-center items-center relative border border-subtle-text border-dotted rounded-lg p-6 cursor-pointer">
-                <input
+              <input
                   type="file"
                   id={`upload-image-${index}`}
                   name="image"
                   onChange={(e) => handleFileChange(e, index)}
                   className="absolute inset-0 w-full h-full opacity-0 z-50"
                 />
-                <div className="text-center">
+                {formImagePreview ? (
                   <Image
-                    className="mx-auto h-12 w-12"
-                    src="/images/add-candidate-image-icon.svg"
-                    alt="Upload Image"
-                    width={48}
-                    height={48}
+                    src={formImagePreview}
+                    alt={`Preview of Candidate ${index + 1}`}
+                    width={100}
+                    height={100}
+                    className="w-full h-full object-cover"
                   />
-                  <h3 className="mt-2 text-sm font-medium text-gray-900">
-                    <label className="relative cursor-pointer">
-                      <div className="flex flex-col">
-                        <span className="text-base font-roboto-flex font-normal">
-                          Drag your image here or browse
-                        </span>
-                        <span className="text-subtle-text text-xs ">
-                          Support JPG, PNG, SVG
-                        </span>
-                      </div>
-                    </label>
-                  </h3>
-                </div>
+                ) : (
+                  <div className="text-center">
+                    <Image
+                      className="mx-auto h-12 w-12"
+                      src="/images/add-candidate-image-icon.svg"
+                      alt="Upload Image"
+                      width={48}
+                      height={48}
+                    />
+                    <h3 className="mt-2 text-sm font-medium text-gray-900">
+                      <label className="relative cursor-pointer">
+                        <div className="flex flex-col">
+                          <span className="text-base font-roboto-flex font-normal">
+                            Drag your image here or browse
+                          </span>
+                          <span className="text-subtle-text text-xs">
+                            Support JPG, PNG, SVG
+                          </span>
+                        </div>
+                      </label>
+                    </h3>
+                  </div>
+                )}
               </div>
             </div>
             <button
@@ -185,13 +199,13 @@ export default function AddCandidate() {
 
   return (
     <div className="w-full flex items-center justify-center">
-      <main className="w-[639px] h-full flex flex-col gap-16">
+      <main className="w-full md:w-[639px] h-full flex flex-col gap-8 md:gap-16 my-10">
         <div className="flex justify-between w-full px-2 border-b-2 border-b-subtle-text border-opacity-10">
           {tabs.map((tab, k) => (
             <span
               key={k}
               onClick={() => setSelectedTab(k)}
-              className={`pb-4 text-subtle-text text-xl font-space-grotesk cursor-pointer ${
+              className={`pb-4 text-subtle-text text-xs md:text-xl font-space-grotesk cursor-pointer ${
                 k === selectedTab
                   ? "border-b-2 border-secondary text-secondary"
                   : ""
@@ -201,12 +215,12 @@ export default function AddCandidate() {
             </span>
           ))}
         </div>
-        <div className="w-full flex flex-col gap-4">
+        <div className="w-full flex flex-col gap-4  px-2">
           <div>{forms.map((_, k) => FormComponent({ index: k }))}</div>
           <button
             type="button"
             onClick={addForm}
-            className="self-end border-b-4 border-b-secondary focus:outline-none"
+            className="text-sm md:text-base self-end border-b-4 border-b-secondary focus:outline-none"
           >
             Add more
           </button>
@@ -214,7 +228,7 @@ export default function AddCandidate() {
         <button
           type="button"
           onClick={handleSubmit}
-          className="w-48 py-4 self-end border border-subtle-text rounded-full"
+          className="md:mr-0 mr-2 text-sm md:text-base w-24 md:w-48 py-2 md:py-4 self-end border border-subtle-text rounded-full"
         >
           Save
         </button>
