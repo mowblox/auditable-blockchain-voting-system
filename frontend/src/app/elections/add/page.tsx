@@ -1,6 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import { useState } from "react";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import TextField from "@mui/material/TextField";
+import dayjs from "dayjs";
 
 export default function AddElection() {
   const [activeTab, setActiveTab] = useState("Elections");
@@ -23,69 +27,34 @@ export default function AddElection() {
   };
 
   return (
-    <div className="h-full">
-      <div className="ml-[2%] flex mt-14 gap-14">
-        <div className="w-[25%]">
-          <h2 className="gradient-text font-bold text-[45px] font-space-grotesk leading-tight">
+    <div className="h-full px-4 lg:px-0">
+      <div className="ml-[5%] flex flex-col lg:flex-row mt-14 gap-14">
+        <div className="lg:w-[25%]">
+          <h2 className="gradient-text font-bold text-[32px] lg:text-[45px] font-space-grotesk leading-tight">
             Let’s create an election
           </h2>
-          <p className="text-subtle-text text-[16px] w-[80%]">
+          <p className="text-subtle-text text-[16px] lg:w-[80%]">
             Launch your election and watch the results unfold.
           </p>
         </div>
 
-        <div className="block ml-10">
+        <div className="mt-8 lg:mt-0 lg:ml-10 w-full lg:w-auto">
           <div className="tabs mb-8">
-            <button
-              className={`${
-                activeTab === "Elections"
-                  ? "border-b-2 border-[#4C9FE4] text-[#4C9FE4]"
-                  : "text-subtle-text]"
-              }  pb-2 mr-14 text-[18px]  font-space-grotesk cursor-pointer`}
-              onClick={() => setActiveTab("Elections")}
-            >
-              Election
-            </button>
-            <button
-              className={`${
-                activeTab === "Candidates"
-                  ? "border-b-2 border-[#4C9FE4] text-[#4C9FE4]"
-                  : "text-subtle-text"
-              } pb-2 mr-14 text-[18px] font-space-grotesk cursor-pointer`}
-              onClick={() => setActiveTab("Candidates")}
-            >
-              Candidates
-            </button>
-            <button
-              className={`${
-                activeTab === "Voters"
-                  ? "border-b-2 border-[#4C9FE4] text-[#4C9FE4]"
-                  : "text-subtle-text"
-              } pb-2 mr-14 text-[18px] font-space-grotesk cursor-pointer`}
-              onClick={() => setActiveTab("Voters")}
-            >
-              Voters
-            </button>
-            <button
-              className={`${
-                activeTab === "Summary"
-                  ? "border-b-2 border-[#4C9FE4] text-[#4C9FE4]"
-                  : "text-subtle-text"
-              } pb-2 mr-14 text-[18px] font-space-grotesk cursor-pointer`}
-              onClick={() => setActiveTab("Summary")}
-            >
-              Summary
-            </button>
-            <button
-              className={`${
-                activeTab === "Links"
-                  ? "border-b-2 border-[#4C9FE4] text-[#4C9FE4]"
-                  : "text-subtle-text"
-              } pb-2 text-[18px] font-space-grotesk cursor-pointer`}
-              onClick={() => setActiveTab("Links")}
-            >
-              Link
-            </button>
+            {["Elections", "Candidates", "Voters", "Summary", "Links"].map(
+              (tab) => (
+                <button
+                  key={tab}
+                  className={`${
+                    activeTab === tab
+                      ? "border-b-2 border-[#4C9FE4] text-[#4C9FE4]"
+                      : "text-subtle-text"
+                  } pb-2 mr-6 lg:mr-14 text-[12px] md:text-[16px] lg:text-[18px] font-space-grotesk cursor-pointer`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </button>
+              )
+            )}
           </div>
 
           {/* Displaying Tab content */}
@@ -97,29 +66,11 @@ export default function AddElection() {
 }
 
 function Elections() {
-  useEffect(() => {
-    const setCustomPlaceholder = (input, placeholder) => {
-      input.onfocus = function () {
-        this.type = "date";
-        this.placeholder = "";
-      };
-      input.onblur = function () {
-        if (!this.value) {
-          this.type = "text";
-          this.placeholder = placeholder;
-        }
-      };
-    };
-
-    const startDateInput = document.getElementById("start-date");
-    const endDateInput = document.getElementById("end-date");
-
-    setCustomPlaceholder(startDateInput, "Start Date");
-    setCustomPlaceholder(endDateInput, "End Date");
-  }, []);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   return (
-    <div className="w-full ">
+    <div className="w-full mb-28">
       <form>
         <div className="mb-10">
           <label
@@ -152,43 +103,82 @@ function Elections() {
         </div>
 
         <div className="mb-12">
-          <label className="block text-[16px]  mb-4 text-white font-space-grotesk">
+          <label className="block text-[16px] mb-4 text-white font-space-grotesk">
             Election Period
           </label>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             {/* Start Date Picker */}
-            <div className="flex justify-between gap-4 border rounded-md pl-4 border-gray-300">
-              <Image
-                src="/images/calendar.svg"
-                width={20}
-                height={20}
-                alt="Calendar Icon"
-                className="mr-2 text-subtle-text"
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Start Date"
+                value={startDate}
+                onChange={(newValue) => setStartDate(newValue ?? null)}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    placeholder="Start Date"
+                  />
+                )}
+                sx={{
+                  "& .MuiInputBase-root": {
+                    color: "#939393",
+                    border: "1px solid #939393",
+                    borderRadius: "8px",
+                    padding: "8px 12px",
+                  },
+                  "& .MuiInputBase-root::placeholder": {
+                    color: "red !important",
+                  },
+                  "& .MuiInputBase-root:focus-within": {
+                    border: "none"
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "#939393 !important",
+                  },
+                  "& .MuiInputBase-input": {
+                    color: "#939393 !important",
+                  },
+                  "& .MuiSvgIcon-root": {
+                    color: "#939393",
+                  },
+                }}
               />
-              <input
-                className="w-1/2 p-3 border-none focus:outline-none bg-[#070707] text-subtle-text"
-                type="text"
-                id="start-date"
-                placeholder="Start Date"
-              />
-            </div>
+            </LocalizationProvider>
 
             {/* End Date Picker */}
-            <div className="flex justify-between gap-4 border rounded-md pl-4 border-gray-300">
-              <Image
-                src="/images/calendar.svg"
-                width={20}
-                height={20}
-                alt="Calendar Icon"
-                className="mr-2 text-subtle-text"
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="End Date"
+                value={endDate}
+                onChange={(newValue) => setEndDate(newValue ?? null)}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    placeholder="End Date"
+                  />
+                )}
+                sx={{
+                  "& .MuiInputBase-root": {
+                    color: "#939393",
+                    border: "1px solid #939393",
+                    borderRadius: "8px",
+                    padding: "8px 12px",
+                  },
+                  "& .MuiInputBase-root:focus-within": {
+                    border: "none"
+                  },
+                  "& .MuiInputBase-input::placeholder": {
+                    color: "#939393",
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "#939393 !important",
+                  },
+                  "& .MuiSvgIcon-root": {
+                    color: "#939393",
+                  },
+                }}
               />
-              <input
-                className="w-1/2 p-3 border-none focus:outline-none bg-[#070707] text-subtle-text"
-                type="text"
-                id="end-date"
-                placeholder="End Date"
-              />
-            </div>
+            </LocalizationProvider>
           </div>
         </div>
 
@@ -196,7 +186,7 @@ function Elections() {
           <label className="block text-[16px] mb-2 text-white font-space-grotesk">
             Election Type
           </label>
-          <div className="flex gap-8">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
             <label className="flex items-center text-subtle-text">
               <input
                 className="mr-2 appearance-none w-4 h-4 border border-gray-300 rounded-full bg-[#070707] checked:bg-secondary cursor-pointer"
@@ -225,7 +215,7 @@ function Elections() {
         </div>
 
         <button
-          className="mt-6 bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer text-white px-14 py-3 rounded-3xl float-right"
+          className="mt-6 bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer text-white px-14 py-3 rounded-3xl w-full sm:w-auto float-none sm:float-right"
           type="submit"
         >
           next
