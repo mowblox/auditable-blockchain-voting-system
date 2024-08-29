@@ -7,12 +7,10 @@ export default function ElectionDetailLayout({
 }>) {
   return (
     <>
-      <div className="tabs mb-8">
+      <div className="mb-8">
         <TopNav />
       </div>
-
-      {/* Displaying Tab content */}
-      <div className="tab-content">{children}</div>
+      {children}
     </>
   );
 }
