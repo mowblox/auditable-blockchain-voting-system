@@ -216,7 +216,11 @@ export default function AddCandidate() {
           ))}
         </div>
         <div className="w-full flex flex-col gap-4  px-2">
-          <div>{forms.map((_, k) => FormComponent({ index: k }))}</div>
+          <div>{forms.map((_, k) => (
+            <div key={k}>
+               {FormComponent({ index: k })}
+            </div>
+          ) )}</div>
           <button
             type="button"
             onClick={addForm}
