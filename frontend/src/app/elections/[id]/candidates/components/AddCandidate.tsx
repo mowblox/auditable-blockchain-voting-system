@@ -78,9 +78,8 @@ export default function AddCandidate() {
 
     return (
       <div
-        className={`w-full flex flex-col gap-4 ${
-          isOpen ? "bg-dark-alt rounded-[10px]" : "gradient-bg rounded-lg"
-        }`}
+        className={`w-full flex flex-col gap-4 ${isOpen ? "bg-dark-alt rounded-[10px]" : "gradient-bg rounded-lg"
+          }`}
       >
         <div
           onClick={togglePanel}
@@ -97,9 +96,8 @@ export default function AddCandidate() {
           />
         </div>
         <form
-          className={`grid transition-all duration-[0.4s] ${
-            isOpen ? "grid-rows-[1fr] pt-10 pb-20" : "grid-rows-[0fr]"
-          }`}
+          className={`grid transition-all duration-[0.4s] ${isOpen ? "grid-rows-[1fr] pt-10 pb-20" : "grid-rows-[0fr]"
+            }`}
         >
           <div className="overflow-hidden flex flex-col gap-10">
             <div className="flex flex-col">
@@ -144,7 +142,7 @@ export default function AddCandidate() {
                 Upload image
               </label>
               <div className="w-full h-44 flex justify-center items-center relative border border-subtle-text border-dotted rounded-lg p-6 cursor-pointer">
-              <input
+                <input
                   type="file"
                   id={`upload-image-${index}`}
                   name="image"
@@ -198,45 +196,28 @@ export default function AddCandidate() {
   };
 
   return (
-    <div className="w-full flex items-center justify-center">
-      <main className="w-full md:w-[639px] h-full flex flex-col gap-8 md:gap-16 my-10">
-        <div className="flex justify-between w-full px-2 border-b-2 border-b-subtle-text border-opacity-10">
-          {tabs.map((tab, k) => (
-            <span
-              key={k}
-              onClick={() => setSelectedTab(k)}
-              className={`pb-4 text-subtle-text text-xs md:text-xl font-space-grotesk cursor-pointer ${
-                k === selectedTab
-                  ? "border-b-2 border-secondary text-secondary"
-                  : ""
-              }`}
-            >
-              {tab}
-            </span>
-          ))}
-        </div>
-        <div className="w-full flex flex-col gap-4  px-2">
-          <div>{forms.map((_, k) => (
-            <div key={k}>
-               {FormComponent({ index: k })}
-            </div>
-          ) )}</div>
-          <button
-            type="button"
-            onClick={addForm}
-            className="text-sm md:text-base self-end border-b-4 border-b-secondary focus:outline-none"
-          >
-            Add more
-          </button>
-        </div>
+    <div className="w-full mb-28">
+      <div className="w-full flex flex-col gap-4  px-2">
+        <div>{forms.map((_, k) => (
+          <div key={k}>
+            {FormComponent({ index: k })}
+          </div>
+        ))}</div>
         <button
           type="button"
-          onClick={handleSubmit}
-          className="md:mr-0 mr-2 text-sm md:text-base w-24 md:w-48 py-2 md:py-4 self-end border border-subtle-text rounded-full"
+          onClick={addForm}
+          className="text-sm md:text-base self-end border-b-4 border-b-secondary focus:outline-none"
         >
-          Save
+          Add more
         </button>
-      </main>
+      </div>
+      <button
+        type="button"
+        onClick={handleSubmit}
+        className="md:mr-0 mr-2 text-sm md:text-base w-24 md:w-48 py-2 md:py-4 self-end border border-subtle-text rounded-full"
+      >
+        Save
+      </button>
     </div>
   );
 }

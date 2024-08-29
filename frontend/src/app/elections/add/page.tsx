@@ -1,66 +1,8 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function AddElection() {
-  const [activeTab, setActiveTab] = useState("Elections");
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case "Elections":
-        return <Elections />;
-      case "Candidates":
-        return <Candidates />;
-      case "Voters":
-        return <Voters />;
-      case "Summary":
-        return <Summary />;
-      case "Links":
-        return <Links />;
-      default:
-        return <Elections />;
-    }
-  };
-
-  return (
-    <div className="h-full px-4 lg:px-0">
-      <div className="md:w-[80%] m-auto flex flex-col lg:flex-row mt-14 gap-14">
-        <div className="lg:w-[25%]">
-          <h2 className="gradient-text font-bold text-[32px] lg:text-[45px] font-space-grotesk leading-tight">
-            Let’s create an election
-          </h2>
-          <p className="text-subtle-text text-[16px] lg:w-[80%]">
-            Launch your election and watch the results unfold.
-          </p>
-        </div>
-
-        <div className="mt-8 lg:mt-0 lg:ml-10 w-full lg:w-auto">
-          <div className="tabs mb-8">
-            {["Elections", "Candidates", "Voters", "Summary", "Links"].map(
-              (tab) => (
-                <button
-                  key={tab}
-                  className={`${
-                    activeTab === tab
-                      ? "border-b-2 border-[#4C9FE4] text-[#4C9FE4]"
-                      : "text-subtle-text"
-                  } pb-2 mr-6 lg:mr-14 text-[12px] md:text-[16px] lg:text-[18px] font-space-grotesk cursor-pointer`}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab}
-                </button>
-              )
-            )}
-          </div>
-
-          {/* Displaying Tab content */}
-          <div className="tab-content">{renderContent()}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Elections() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
@@ -152,49 +94,14 @@ function Elections() {
           </div>
         </div>
 
-        <button
+        <Link
+          href={'/elections/1'}
           className="mt-6 bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer text-white px-14 py-3 rounded-3xl w-full sm:w-auto float-none sm:float-right"
           type="submit"
         >
           next
-        </button>
+        </Link>
       </form>
-    </div>
-  );
-}
-
-function Candidates() {
-  return (
-    <div>
-      <h2 className="text-[24px] font-bold">Candidates</h2>
-      <p>This is the Candidates tab content.</p>
-    </div>
-  );
-}
-
-function Voters() {
-  return (
-    <div>
-      <h2 className="text-[24px] font-bold">Voters</h2>
-      <p>This is the Voters tab content.</p>
-    </div>
-  );
-}
-
-function Summary() {
-  return (
-    <div>
-      <h2 className="text-[24px] font-bold">Summary</h2>
-      <p>This is the Summary tab content.</p>
-    </div>
-  );
-}
-
-function Links() {
-  return (
-    <div>
-      <h2 className="text-[24px] font-bold">Links</h2>
-      <p>This is the Links tab content.</p>
     </div>
   );
 }
