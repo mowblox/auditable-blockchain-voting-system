@@ -1,10 +1,5 @@
 "use client";
 import { useState } from "react";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import TextField from "@mui/material/TextField";
-import dayjs from "dayjs";
 
 export default function AddElection() {
   const [activeTab, setActiveTab] = useState("Elections");
@@ -66,8 +61,8 @@ export default function AddElection() {
 }
 
 function Elections() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   return (
     <div className="w-full mb-28">
@@ -108,77 +103,20 @@ function Elections() {
           </label>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             {/* Start Date Picker */}
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="Start Date"
-                value={startDate}
-                onChange={(newValue) => setStartDate(newValue ?? null)}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    placeholder="Start Date"
-                  />
-                )}
-                sx={{
-                  "& .MuiInputBase-root": {
-                    color: "#939393",
-                    border: "1px solid #939393",
-                    borderRadius: "8px",
-                    padding: "8px 12px",
-                  },
-                  "& .MuiInputBase-root::placeholder": {
-                    color: "red !important",
-                  },
-                  "& .MuiInputBase-root:focus-within": {
-                    border: "none"
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "#939393 !important",
-                  },
-                  "& .MuiInputBase-input": {
-                    color: "#939393 !important",
-                  },
-                  "& .MuiSvgIcon-root": {
-                    color: "#939393",
-                  },
-                }}
-              />
-            </LocalizationProvider>
+            <input
+              type="date"
+              className="w-full sm:w-auto py-3 border border-gray-300 bg-[#070707] text-subtle-text rounded-lg px-4 focus:border-gray-300 focus:outline-none"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
 
             {/* End Date Picker */}
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="End Date"
-                value={endDate}
-                onChange={(newValue) => setEndDate(newValue ?? null)}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    placeholder="End Date"
-                  />
-                )}
-                sx={{
-                  "& .MuiInputBase-root": {
-                    color: "#939393",
-                    border: "1px solid #939393",
-                    borderRadius: "8px",
-                    padding: "8px 12px",
-                  },
-                  "& .MuiInputBase-root:focus-within": {
-                    border: "none"
-                  },
-                  "& .MuiInputBase-input::placeholder": {
-                    color: "#939393",
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "#939393 !important",
-                  },
-                  "& .MuiSvgIcon-root": {
-                    color: "#939393",
-                  },
-                }}
-              />
-            </LocalizationProvider>
+            <input
+              type="date"
+              className="w-full sm:w-auto py-3 border border-gray-300 bg-[#070707] text-subtle-text rounded-lg px-4 focus:border-gray-300 focus:outline-none"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
           </div>
         </div>
 
