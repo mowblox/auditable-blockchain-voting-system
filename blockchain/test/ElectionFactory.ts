@@ -1,14 +1,15 @@
+
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
-import { ethers } from "hardhat";
+import hre from "hardhat";
 
 
 describe("ElectionFactory Contract", function () {
   async function deployElectionFactoryFixture() {
     // Get the ContractFactory and Signers here.
-    const [owner, addr1] = await ethers.getSigners();
+    const [owner, addr1] = await hre.ethers.getSigners();
 
-    const ElectionFactory = await ethers.getContractFactory("ElectionFactory");
+    const ElectionFactory = await hre.ethers.getContractFactory("ElectionFactory");
     const electionFactory = await ElectionFactory.deploy();
 
     // await electionFactory.deployed();
@@ -68,7 +69,7 @@ describe("ElectionFactory Contract", function () {
     await newElection.wait();
 
     // Attempt to delete the election with a non-owner account
-    await expect(electionFactory.connect(addr1).deleteElection(0)).to.be.revertedWith(
+    await expect(electionFactory.connect(addr1).deleteElection(0)).to.be.rejectedWith(
         "You are not the owner"
     );
 
