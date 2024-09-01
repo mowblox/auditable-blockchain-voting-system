@@ -1,15 +1,14 @@
-// SPDX-License-Identifier: MIT 
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
-
 import "./Election.sol";
 
 contract ElectionFactory {
     address owner;
-    
-    //Array to keep track of the elections
+
+    // Array to keep track of the elections
     address[] elections;
 
-    constructor (){
+    constructor() {
         owner = msg.sender;
     }
 
@@ -18,10 +17,15 @@ contract ElectionFactory {
         _;
     }
 
-    //Event emitted when an election is created
+    // Event emitted when an election is created
     event ElectionCreated(address electionAddress);
 
-    //Function to create new election
+    // Function to return the owner address (added this function)
+    function getOwner() public view returns (address) {
+        return owner;
+    }
+
+    // Function to create new election
     function createElection(
         string memory _title,
         string memory _description,
@@ -29,7 +33,7 @@ contract ElectionFactory {
         uint _startDate,
         uint _endDate
     ) public {
-        //Create a new instance of the Election contract
+        // Create a new instance of the Election contract
         Election newElection = new Election(
             _title,
             _description,
@@ -38,25 +42,24 @@ contract ElectionFactory {
             _endDate
         );
 
-        //Store the address of the newly created election
+        // Store the address of the newly created election
         elections.push(address(newElection));
 
-        //Emit an event for the creation of the new contract
+        // Emit an event for the creation of the new contract
         emit ElectionCreated(address(newElection));
     }
-    
 
-    //function to get addresses of all elections
-    function getElections() public view returns (address[] memory){
+    // Function to get addresses of all elections
+    function getElections() public view returns (address[] memory) {
         return elections;
     }
 
-    //function to delete an election
+    // Function to delete an election
     function deleteElection(uint _electionID) public onlyOwner {
         delete elections[_electionID];
     }
 
-    //Function to retrieve the total number of elections
+    // Function to retrieve the total number of elections
     function getTotalElections() public view returns (uint) {
         return elections.length;
     }

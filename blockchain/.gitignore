@@ -19,3 +19,4 @@ ignition/deployments/chain-31337
 # Others
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
