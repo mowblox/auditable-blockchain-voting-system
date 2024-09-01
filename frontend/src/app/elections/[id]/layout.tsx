@@ -1,4 +1,4 @@
-
+import TopNav from "@/components/TopNav";
 
 export default function ElectionDetailLayout({
   children,
@@ -6,6 +6,11 @@ export default function ElectionDetailLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>{children}</>
+    <>
+      <div className="mb-8">
+        <TopNav />
+      </div>
+      {children}
+    </>
   );
 }

@@ -10,6 +10,7 @@ import king from "../../public/images/king-illus.png";
 import smile from "../../public/images/smiley-illus.png";
 import cardGradient from "../../public/images/card-gradient.png";
 import gradient2 from "../../public/images/Gradient-2.png";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "ABVS | Landing",
@@ -42,9 +43,9 @@ export default function Landing() {
             power of decentralization to make informed decisions collectively.
           </p>
           <div className="gap-4 md:gap-6 lg:gap-8 flex justify-center mt-6">
-            <button className="py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer">
+            <Link href={'/elections/add'} className="py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer">
               create election
-            </button>
+            </Link>
             <button className="bg-dark border border-white py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] hover:bg-[#939393] cursor-pointer">
               cast vote
             </button>
