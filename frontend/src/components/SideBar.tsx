@@ -30,7 +30,17 @@ export default function SideBar() {
       h1: `Let's Vote`,
       p: `Turpis non molestie amet tortor. Diam amet volutpat`,
       href: `/elections/${id}/link`
-    }
+    },
+    {
+      h1: `Check Eligibility`,
+      p: `Turpis non molestie amet tortor. Diam amet volutpat`,
+      href: `/elections/${id}/verify`
+    },
+    {
+      h1: `Vote Now`,
+      p: `Turpis non molestie amet tortor. Diam amet volutpat`,
+      href: `/elections/${id}/vote`
+    },
   ];
 
   return (
