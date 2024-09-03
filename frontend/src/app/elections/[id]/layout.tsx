@@ -1,4 +1,4 @@
-import TopNav from "@/components/TopNav";
+import TopNavWrapper from "@/components/TopNavWrapper";
 
 export default function ElectionDetailLayout({
   children,
@@ -7,9 +7,7 @@ export default function ElectionDetailLayout({
 }>) {
   return (
     <>
-      <div className="mb-8">
-        <TopNav />
-      </div>
+      <TopNavWrapper />
       {children}
     </>
   );
