@@ -13,6 +13,7 @@ const config: Config = {
       "text": "#F5F5F5",
       "subtle-text": "#939393",
       "dark": "#070707",
+      "gray": "#0B0F12"
     },
     fontFamily: {
       "sans": ['var(--font-roboto-flex)'],
