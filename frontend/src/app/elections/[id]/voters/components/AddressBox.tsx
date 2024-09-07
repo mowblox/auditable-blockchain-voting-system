@@ -5,7 +5,7 @@ interface AddressBoxProps {
   wallets: string[],
   walletCount: number,
   setWallets: React.Dispatch<React.SetStateAction<string[]>>,
-  setWalletCount: React.Dispatch<React.SetStateAction<number>>
+  setWalletCount: React.Dispatch<React.SetStateAction<any>>
 }
 
 export default function AddressBox ({ wallets, walletCount, setWallets, setWalletCount } : AddressBoxProps) {
