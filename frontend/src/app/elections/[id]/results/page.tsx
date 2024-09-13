@@ -52,7 +52,7 @@ export default function ElectionResults() {
               const percentage = getPercentage(candidate.votes);
               return (
                 <div className="flex flex-col mb-6" key={index}>
-                  <div className="flex gap-4 justify-between text-sm md:text-base">
+                  <div className="flex gap-4 justify-between text-sm ">
                     <p className="w-[50%]">{candidate.name}</p>
                     <p className="text-subtle-text">{candidate.votes} votes</p>
                     <p className="text-subtle-text">{percentage.toFixed(2)}%</p>
