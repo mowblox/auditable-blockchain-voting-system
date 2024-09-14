@@ -34,7 +34,7 @@ describe("Election Contract", function () {
   it("should add a candidate", async function () {
     const { election } = await loadFixture(deployElectionFixture);
 
-    await election.addCandidate("Alice");
+    await election.addCandidate("Alice","team1", "image1");
     const candidates = await election.getCandidates();
     expect(candidates.length).to.equal(1);
     expect(candidates[0].name).to.equal("Alice");
@@ -44,21 +44,21 @@ describe("Election Contract", function () {
     const { election, voter1 } = await loadFixture(deployElectionFixture);
 
     await election.addVoter(voter1.address);
-    const [hasVoted, candidateId] = await election.getVoter(voter1.address);
-    expect(hasVoted).to.equal(false);
+    const [voted, candidateId] = await election.getVoter(voter1.address);
+    expect(voted).to.equal(false);
     expect(candidateId).to.equal(0);
   });
 
   it("should allow a voter to cast a vote", async function () {
     const { election, voter1 } = await loadFixture(deployElectionFixture);
 
-    await election.addCandidate("Alice");
+    await election.addCandidate("Alice","team1", "image1");
     await election.addVoter(voter1.address);
 
     await election.connect(voter1).castVote(1);
 
-    const [hasVoted, candidateId] = await election.getVoter(voter1.address);
-    expect(hasVoted).to.equal(true);
+    const [voted, candidateId] = await election.getVoter(voter1.address);
+    expect(voted).to.equal(true);
     expect(candidateId).to.equal(1);
 
     const candidates = await election.getCandidates();
@@ -68,7 +68,7 @@ describe("Election Contract", function () {
   it("should emit VoteCast event when a vote is cast", async function () {
     const { election, voter1 } = await loadFixture(deployElectionFixture);
 
-    await election.addCandidate("Alice");
+    await election.addCandidate("Alice","team1", "image1");
     await election.addVoter(voter1.address);
 
     await expect(election.connect(voter1).castVote(1))
@@ -79,7 +79,7 @@ describe("Election Contract", function () {
   it("should not allow voting twice", async function () {
     const { election, voter1 } = await loadFixture(deployElectionFixture);
 
-    await election.addCandidate("Alice");
+    await election.addCandidate("Alice","team1", "image1");
     await election.addVoter(voter1.address);
 
     await election.connect(voter1).castVote(1);
@@ -90,7 +90,7 @@ describe("Election Contract", function () {
   it("should not allow voting for a non-existent candidate", async function () {
     const { election, voter1 } = await loadFixture(deployElectionFixture);
 
-    await election.addCandidate("Alice");
+    await election.addCandidate("Alice","team1", "image1");
     await election.addVoter(voter1.address);
 
     await expect(election.connect(voter1).castVote(2)).to.be.revertedWith("Invalid candidate. Please enter a valid candidate ID");

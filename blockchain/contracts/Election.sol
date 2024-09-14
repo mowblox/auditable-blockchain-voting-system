@@ -16,10 +16,12 @@ contract Election {
         uint id;
         string name;
         uint voteCount;
+        string team;
+        string image;
     }
     // defines structure for a voter
     struct Voter {
-        bool hasVoted;
+        bool voted;
         uint candidateId;
     }
 
@@ -54,11 +56,21 @@ contract Election {
     }
 
     // function to create a new candidate
-    function addCandidate(string memory _name) public onlyWhileOpen {
+    function addCandidate(
+        string memory _name,
+        string memory _team,
+        string memory _image
+    ) public onlyWhileOpen {
         // increamented to assign a new id to a candidate
         candidatesCount++;
         // a new candidate struct is created and stored in the candiates mapping
-        candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
+        candidates[candidatesCount] = Candidate(
+            candidatesCount,
+            _name,
+            0,
+            _team,
+            _image
+        );
     }
 
     //function to get all candidates
@@ -72,25 +84,25 @@ contract Election {
 
     // Function to add a voter to the election
     function addVoter(address _voterAddress) public onlyWhileOpen {
-        require(!voters[_voterAddress].hasVoted, "Voter is already registered");
+        require(!voters[_voterAddress].voted, "Voter is already registered");
         voters[_voterAddress] = Voter(false, 0);
     }
 
     //function to get a voter by their Address
     function getVoter(address _voterAddress) public view returns (bool, uint) {
         Voter memory voter = voters[_voterAddress];
-        return (voter.hasVoted, voter.candidateId);
+        return (voter.voted, voter.candidateId);
     }
 
     //function to cast a vote
     function castVote(uint _candidateId) public onlyWhileOpen {
-        require(!voters[msg.sender].hasVoted, "You have already voted.");
+        require(!voters[msg.sender].voted, "You have already voted.");
         require(
             _candidateId > 0 && _candidateId <= candidatesCount,
             "Invalid candidate. Please enter a valid candidate ID"
         );
 
-        voters[msg.sender].hasVoted = true;
+        voters[msg.sender].voted = true;
         voters[msg.sender].candidateId = _candidateId;
 
         candidates[_candidateId].voteCount++;
