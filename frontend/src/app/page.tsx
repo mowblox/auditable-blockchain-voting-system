@@ -46,9 +46,9 @@ export default function Landing() {
             <Link href={'/elections/add'} className="py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer">
               create election
             </Link>
-            <button className="bg-dark border border-white py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] hover:bg-[#939393] cursor-pointer">
+            <Link href={'/elections'} className="bg-dark border border-white py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] hover:bg-[#939393] cursor-pointer">
               cast vote
-            </button>
+            </Link>
           </div>
         </div>
       </div>
