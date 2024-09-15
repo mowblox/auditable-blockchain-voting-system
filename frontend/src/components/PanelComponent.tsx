@@ -1,5 +1,4 @@
 "use client"
-
 import Image from "next/image";
 import { Fragment, useState } from "react";
 
@@ -12,13 +11,13 @@ interface PanelProps {
 }
 
 // A Reusable panel component for ABVS which allows custom callbacks
-export default function PanelComponent ({children, title, icon, index, callback}: PanelProps) {
-  const [panelState, setPanelState] = useState(index==1 ? true : false)
+export default function PanelComponent({ children, title, icon, index, callback }: PanelProps) {
+  const [panelState, setPanelState] = useState(index == 1 ? true : false)
   const togglePanel = () => setPanelState(!panelState)
-  
+
   // Function to call custom callback if exists else toggles panel
   const handlePanelClick = () => {
-    if(callback){
+    if (callback) {
       return callback()
     }
     return togglePanel()
@@ -41,9 +40,9 @@ export default function PanelComponent ({children, title, icon, index, callback}
         />
       </div>
       {
-        children && panelState ? 
-        <slot className="transition-all duration-[0.4s]">{children}</slot> : 
-        <slot></slot>
+        children && panelState ?
+          <slot className="transition-all duration-[0.4s]">{children}</slot> :
+          <slot></slot>
       }
     </Fragment>
   );

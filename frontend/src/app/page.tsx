@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function Landing() {
   return (
-    <div className="relative pb-52">
+    <div className="relative pb-52 text-text">
       <Image
         src={heroIcon.src}
         width={heroIcon.width} // Add width

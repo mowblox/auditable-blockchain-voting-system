@@ -1,5 +1,6 @@
+'use client';
 import Image from "next/image";
-import ConnectButton from "./ConnectButton";
+import { MetaMaskButton } from "@metamask/sdk-react-ui";
 
 
 export default function Header() {
@@ -18,9 +19,7 @@ export default function Header() {
           <div className="flex items-center lg:order-2">
             <a href="#" className="text-subtle-text font-medium text-sm px-4">election</a>
             <a href="#" className="text-subtle-text font-medium text-sm px-4">vote</a>
-            <a href="#" className="text-dark bg-text rounded-full text-sm px-4 lg:px-5 py-1 lg:py-1.5 mr-2 ml-5 flex">
-              <ConnectButton/>
-            </a>
+            <MetaMaskButton theme="light" color="white"></MetaMaskButton>
           </div>
         </div>
       </nav>
