@@ -77,7 +77,7 @@ describe("ElectionFactory Contract", function () {
     await electionFactory.connect(owner).deleteElection(0);
 
     const elections = await electionFactory.getElections();
-    expect(elections[0]).to.equal(ethers.ZeroAddress);  // Use ethers.constants.AddressZero to check the zero address
+    expect(elections[0]).to.equal(hre.ethers.ZeroAddress);  // Use ethers.constants.AddressZero to check the zero address
 });
 
   it("Should return the correct total number of elections", async function () {
