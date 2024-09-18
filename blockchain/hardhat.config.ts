@@ -1,8 +1,35 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "dotenv/config";
 
 const config: HardhatUserConfig = {
   solidity: "0.8.24",
+  networks: {
+    sepolia_testnet: {
+      url: `https://ethereum-sepolia-rpc.publicnode.com`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
+    ethereum_mainnet: {
+      url: `https://ethereum-rpc.publicnode.com`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
+    linea_sepolia: {
+      url: `https://rpc.sepolia.linea.build/`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
+    linea_mainnet: {
+      url: `https://rpc.linea.build/`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
+    scroll_sepolia: {
+      url: `https://sepolia-rpc.scroll.io/`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
+    scroll_mainnet: {
+      url: `https://rpc.scroll.io/`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
+  }
 };
 
 export default config;
