@@ -21,6 +21,14 @@ const config: HardhatUserConfig = {
       url: `https://rpc.linea.build/`,
       accounts: [process.env.PRIVATE_KEY as string],
     },
+    scroll_sepolia: {
+      url: `https://sepolia-rpc.scroll.io/`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
+    scroll_mainnet: {
+      url: `https://rpc.scroll.io/`,
+      accounts: [process.env.PRIVATE_KEY as string],
+    },
   }
 };
 

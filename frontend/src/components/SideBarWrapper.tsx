@@ -7,6 +7,7 @@ export default function SideBarWrapper() {
   const pathname = usePathname();
 
   const excludes = [
+    `/elections`,
     `/elections/${id}/results`,
   ];
 
