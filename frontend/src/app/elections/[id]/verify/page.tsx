@@ -1,5 +1,5 @@
+import VerifyVoter from "@/components/elections/VerifyVoter";
 import { Metadata } from "next";
-import VerifyVoter from "./components/VerifyVoter";
 
 export const metadata: Metadata = {
   title: "ABVS | Election Verify",

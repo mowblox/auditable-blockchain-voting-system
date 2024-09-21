@@ -1,5 +1,5 @@
+import AllElections from "@/components/elections/AllElections";
 import { Metadata } from "next";
-import AllElections from "./components/AllElections";
 
 export const metadata: Metadata = {
   title: "ABVS | Elections",

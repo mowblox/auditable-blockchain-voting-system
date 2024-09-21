@@ -1,5 +1,5 @@
+import AddCandidate from "@/components/elections/AddCandidate";
 import { Metadata } from "next";
-import AddCandidate from "./components/AddCandidate";
 
 export const metadata: Metadata = {
   title: "ABVS | Election Candidates",

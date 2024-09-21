@@ -1,5 +1,6 @@
 "use client";
 import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
+import { sepolia, scrollSepolia } from "wagmi/chains";
 
 export default function WalletProvider({
   children,
@@ -14,6 +15,8 @@ export default function WalletProvider({
           url: 'https://abvs.vercel.app',
         },
       }}
+      networks={[sepolia, scrollSepolia]}
+      debug={false}
     >
       {children}
     </MetaMaskUIProvider>
