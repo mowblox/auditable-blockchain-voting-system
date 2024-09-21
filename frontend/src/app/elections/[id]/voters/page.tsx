@@ -10,7 +10,7 @@ const metadata: Metadata = {
 }
 
 
-export default function ElectionVoters() {
+export default function ElectionVotersPage() {
   const [wallets, setWallets] = useState<string[]>([]);
   const [walletCount, setWalletCount] = useState(0);
 
