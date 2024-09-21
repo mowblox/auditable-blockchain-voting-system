@@ -1,5 +1,5 @@
 'use client';
-import { ELECTION_FACTORY_ABI, ELECTION_FACTORY_ADDRESS } from "@/contracts/ElectionFactory";
+import { ELECTION_FACTORY_ABI, getFactoryAddress } from "@/contracts/ElectionFactory";
 import { useSDK } from "@metamask/sdk-react-ui";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -11,11 +11,11 @@ export default function AllElections() {
 
   useEffect(() => {
     // Call transaction
-    if (connected) {
+    if (connected && provider) {
       // Initialize web3
       const web3 = new Web3(provider);
       // Initialize contract
-      const electionFactory = new web3.eth.Contract(ELECTION_FACTORY_ABI, ELECTION_FACTORY_ADDRESS);
+      const electionFactory = new web3.eth.Contract(ELECTION_FACTORY_ABI, getFactoryAddress(provider.getChainId()));
       // Invote method
       electionFactory
         .methods

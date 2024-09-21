@@ -3,17 +3,17 @@
 import { Metadata } from "next";
 import { useState } from "react";
 import PanelComponent from "@/components/PanelComponent";
-import AddressBox from "./components/AddressBox";
+import AddressBox from "@/components/elections/AddressBox";
 
 const metadata: Metadata = {
   title: "ABVS | Election Voters",
 }
 
 
-export default function ElectionVoters() {
+export default function ElectionVotersPage() {
   const [wallets, setWallets] = useState<string[]>([]);
   const [walletCount, setWalletCount] = useState(0);
-  
+
   // Panels on voters page
   const VotersPanels = [
     {
@@ -28,12 +28,12 @@ export default function ElectionVoters() {
       callback: uploadAddress
     }
   ]
-  
+
   function uploadAddress() {
     document.getElementById('file-csv')?.click()
   }
-  
-  function setWalletCountMethod (input: string) {
+
+  function setWalletCountMethod(input: string) {
     // Split addresse with newline and remove empty lines
     const walletAddresses = input.split("\n").map((address: string) => address.trim()).filter((address: string) => address !== "");
     setWalletCount(walletAddresses.length)
@@ -64,21 +64,21 @@ export default function ElectionVoters() {
     // awaiting API/smart contract call
     alert('submit')
   }
-  
+
 
   return (
     <div className="mb-20 flex flex-col">
-      { VotersPanels.map((panel, index) => (
-        <PanelComponent 
-          title={panel.title} 
-          icon={panel.icon} 
-          index={index+1} 
-          callback={panel?.callback} 
+      {VotersPanels.map((panel, index) => (
+        <PanelComponent
+          title={panel.title}
+          icon={panel.icon}
+          index={index + 1}
+          callback={panel?.callback}
           key={index}
         >
           {panel.slot}
         </PanelComponent>
-      )) 
+      ))
       }
       <input type="file" name="" id="file-csv" accept=".csv" className="hidden" onChange={handleFileUpload} />
       <button className="mt-20 px-20 py-5 outline outline-1 outline-[#939393] rounded-full self-end"

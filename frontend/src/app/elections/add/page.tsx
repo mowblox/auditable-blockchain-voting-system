@@ -1,12 +1,12 @@
+import AddElectionForm from "@/components/elections/AddElectionForm";
 import TopNav from "@/components/TopNav";
-import AddElectionForm from "./components/AddElectionForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "ABVS | Add Election",
 }
 
-export default function AddElection() {
+export default function AddElectionPage() {
   return (
     <>
       <div className="mb-8">

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "ABVS | Landing",
 };
 
-export default function Landing() {
+export default function LandingPage() {
   return (
     <div className="relative pb-52 text-text">
       <Image

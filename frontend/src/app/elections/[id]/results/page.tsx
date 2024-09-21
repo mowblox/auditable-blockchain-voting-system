@@ -1,6 +1,6 @@
 
 
-export default function ElectionResults() {
+export default function ElectionResultsPage() {
   const totalVoters = 42; // Total eligible voters
 
   // Example candidates and votes

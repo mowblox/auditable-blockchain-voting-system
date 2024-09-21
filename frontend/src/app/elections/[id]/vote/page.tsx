@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "ABVS | Election Vote",
 };
 
-export default function ElectionVote() {
+export default function ElectionVotePage() {
   interface Candidate {
     name: string;
     about: string;
