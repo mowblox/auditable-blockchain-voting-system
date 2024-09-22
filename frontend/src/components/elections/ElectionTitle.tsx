@@ -1,6 +1,6 @@
 'use client';
 import { ELECTION_ABI } from "@/contracts/Election";
-import { useSDK } from "@metamask/sdk-react-ui";
+import { useSDK } from "@metamask/sdk-react";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
 
