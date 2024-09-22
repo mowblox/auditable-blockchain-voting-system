@@ -1,4 +1,4 @@
-import AddElectionForm from "@/components/elections/AddElectionForm";
+import CreateElection from "@/components/elections/CreateElection";
 import TopNav from "@/components/TopNav";
 import { Metadata } from "next";
 
@@ -13,7 +13,7 @@ export default function AddElectionPage() {
         <TopNav disabled />
       </div>
       <div className="w-full mb-28">
-        <AddElectionForm />
+        <CreateElection />
       </div>
     </>
   );

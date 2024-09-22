@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
 import Web3 from "web3";
 
-export default function AddElectionForm() {
+export default function CreateElection() {
   const router = useRouter();
   const { provider, connected, account, sdk } = useSDK();
   const [loading, setLoading] = useState(false);
@@ -35,15 +35,17 @@ export default function AddElectionForm() {
         if (receipt.events?.ElectionCreated?.returnValues?.electionAddress) {
           return router.push(`/elections/${receipt.events?.ElectionCreated?.returnValues?.electionAddress}`)
         } else {
-          alert('You may have interacted with the wrong network');
           setLoading(false);
+          alert('You may have interacted with the wrong network');
         }
       } else {
+        setLoading(false);
         await sdk?.connect();
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      // console.log(error);
       setLoading(false);
+      alert(error.message);
     }
   }
 
