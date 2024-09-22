@@ -1,41 +1,51 @@
 "use client";
 import { ELECTION_FACTORY_ABI, getFactoryAddress } from "@/contracts/ElectionFactory";
-import { useSDK } from "@metamask/sdk-react-ui";
+import { useSDK } from "@metamask/sdk-react";
 import { useRouter } from "next/navigation";
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useState } from "react";
 import Web3 from "web3";
 
-export default function AddElectionForm() {
+export default function CreateElection() {
   const router = useRouter();
   const { provider, connected, account, sdk } = useSDK();
+  const [loading, setLoading] = useState(false);
 
   const createElection = async (event: SyntheticEvent<HTMLFormElement>) => {
-    // Prevent default form submit behaviour
-    event.preventDefault();
-    // Use FormData API to collect data
-    const formData = new FormData(event.currentTarget);
-    // Send transaction
-    if (connected && provider) {
-      // Initialize web3
-      const web3 = new Web3(provider);
-      // Initialize contract
-      const electionFactory = new web3.eth.Contract(ELECTION_FACTORY_ABI, getFactoryAddress(provider.getChainId()));
-      // Invote method
-      const receipt = await electionFactory.methods.createElection(
-        formData.get('title'),
-        formData.get('description'),
-        formData.get('electionType') === 'public',
-        new Date(formData.get('startDate') as any).valueOf(),
-        new Date(formData.get('endDate') as any).valueOf()
-      ).send({ from: account });
-      // Navigate to detail page
-      if (receipt.events?.ElectionCreated?.returnValues?.electionAddress) {
-        return router.push(`/elections/${receipt.events?.ElectionCreated?.returnValues?.electionAddress}`)
+    try {
+      // Prevent default form submit behaviour
+      event.preventDefault();
+      // Send transaction
+      if (connected && provider) {
+        setLoading(true);
+        // Use FormData API to collect data
+        const formData = new FormData(event.currentTarget);
+        // Initialize web3
+        const web3 = new Web3(provider);
+        // Initialize contract
+        const electionFactory = new web3.eth.Contract(ELECTION_FACTORY_ABI, getFactoryAddress(provider.getChainId()));
+        // Invote method
+        const receipt = await electionFactory.methods.createElection(
+          formData.get('title'),
+          formData.get('description'),
+          formData.get('electionType') === 'public',
+          new Date(formData.get('startDate') as any).valueOf(),
+          new Date(formData.get('endDate') as any).valueOf()
+        ).send({ from: account });
+        // Navigate to detail page
+        if (receipt.events?.ElectionCreated?.returnValues?.electionAddress) {
+          return router.push(`/elections/${receipt.events?.ElectionCreated?.returnValues?.electionAddress}`)
+        } else {
+          setLoading(false);
+          alert('You may have interacted with the wrong network');
+        }
       } else {
-        alert('You may have interacted with the wrong network');
+        setLoading(false);
+        await sdk?.connect();
       }
-    } else {
-      await sdk?.connect();
+    } catch (error: any) {
+      // console.log(error);
+      setLoading(false);
+      alert(error.message);
     }
   }
 
@@ -53,6 +63,7 @@ export default function AddElectionForm() {
           type="text"
           id="title"
           name="title"
+          required
           placeholder="Eg. 2024 SRC President - UG" />
       </div>
 
@@ -68,6 +79,7 @@ export default function AddElectionForm() {
           id="description"
           name="description"
           rows={1}
+          required
           placeholder="Write a brief summary about the purpose of the election"
         ></textarea>
       </div>
@@ -81,12 +93,14 @@ export default function AddElectionForm() {
           <input
             type="date"
             name="startDate"
+            required
             className="w-full sm:w-auto py-3 border border-gray-300 bg-[#070707] text-subtle-text rounded-lg px-4 focus:border-gray-300 focus:outline-none" />
 
           {/* End Date Picker */}
           <input
             type="date"
             name="endDate"
+            required
             className="w-full sm:w-auto py-3 border border-gray-300 bg-[#070707] text-subtle-text rounded-lg px-4 focus:border-gray-300 focus:outline-none" />
         </div>
       </div>
@@ -102,6 +116,7 @@ export default function AddElectionForm() {
               type="radio"
               name="electionType"
               value="public"
+              required
               style={{
                 accentColor: "#4C9FE4",
               }} />
@@ -113,6 +128,7 @@ export default function AddElectionForm() {
               type="radio"
               name="electionType"
               value="private"
+              required
               style={{
                 accentColor: "#4C9FE4",
               }} />
@@ -124,6 +140,7 @@ export default function AddElectionForm() {
       <button
         className="mt-6 bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer text-white px-14 py-3 rounded-3xl w-full sm:w-auto float-none sm:float-right"
         type="submit"
+        disabled={loading}
       >
         next
       </button>

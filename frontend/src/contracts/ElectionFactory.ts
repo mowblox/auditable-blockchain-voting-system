@@ -1,11 +1,10 @@
-import { sepolia, scrollSepolia } from "wagmi/chains";
 import { utils } from "web3";
 
 export const getFactoryAddress = (chainId: string) => {
   switch (chainId) {
-    case utils.toHex(sepolia.id):
+    case utils.toHex(11155111):
       return '0x3e5213A1924b00f7aaAb88fBDF034a9910386FF1';
-    case utils.toHex(scrollSepolia.id):
+    case utils.toHex(534351):
       return '0xF7E2Be9007fEaAcEB821D98011975A78034cCDC6';
     default:
       return '';

@@ -1,13 +1,15 @@
 'use client';
 import { ELECTION_FACTORY_ABI, getFactoryAddress } from "@/contracts/ElectionFactory";
-import { useSDK } from "@metamask/sdk-react-ui";
+import { useSDK } from "@metamask/sdk-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Web3 from "web3";
+import ElectionTitle from "./ElectionTitle";
+import ElectionDescription from "./ElectionDescription";
 
 export default function AllElections() {
   const [elections, setElections] = useState([]);
-  const { provider, connected } = useSDK();
+  const { provider, connected, chainId } = useSDK();
 
   useEffect(() => {
     // Call transaction
@@ -24,14 +26,17 @@ export default function AllElections() {
         .then((addresses) => setElections(addresses as []))
         .catch(console.log);
     }
-  }, [provider, connected])
+  }, [provider, connected, chainId])
 
   return (
-    <div>
+    <div className="grid grid-cols-1 gap-4">
       {elections.map(address => (
-        <div key={address}>
-          <Link href={`/elections/${address}`}>{address}</Link>
-        </div>
+        <Link href={`/elections/${address}`} key={address}>
+          <div className="h-20 overflow-clip">
+            <h1 className="text-2xl"><ElectionTitle address={address} /></h1>
+            <p><ElectionDescription address={address} /></p>
+          </div>
+        </Link>
       ))}
     </div>
   );

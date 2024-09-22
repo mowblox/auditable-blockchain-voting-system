@@ -1,6 +1,5 @@
 "use client";
-import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
-import { sepolia, scrollSepolia } from "wagmi/chains";
+import { MetaMaskProvider } from "@metamask/sdk-react";
 
 export default function WalletProvider({
   children,
@@ -8,17 +7,21 @@ export default function WalletProvider({
   children: React.ReactNode;
 }>) {
   return (
-    <MetaMaskUIProvider
+    <MetaMaskProvider
       sdkOptions={{
         dappMetadata: {
           name: "Auditable Voting Dapp",
           url: 'https://abvs.vercel.app',
         },
+        readonlyRPCMap: {
+          "0xaa36a7": "https://ethereum-sepolia-rpc.publicnode.com",
+          "0x8274f": "`https://sepolia-rpc.scroll.io",
+          "0xe705": "https://rpc.sepolia.linea.build",
+        }
       }}
-      networks={[sepolia, scrollSepolia]}
       debug={false}
     >
       {children}
-    </MetaMaskUIProvider>
+    </MetaMaskProvider>
   );
 }
