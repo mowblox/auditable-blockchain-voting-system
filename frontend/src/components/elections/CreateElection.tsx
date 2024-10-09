@@ -1,14 +1,26 @@
 "use client";
-import { ELECTION_FACTORY_ABI, getFactoryAddress } from "@/contracts/ElectionFactory";
+import {
+  ELECTION_FACTORY_ABI,
+  getFactoryAddress,
+} from "@/contracts/ElectionFactory";
 import { useSDK } from "@metamask/sdk-react";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
 import Web3 from "web3";
+import { DatePicker } from "@nextui-org/react";
 
 export default function CreateElection() {
   const router = useRouter();
   const { provider, connected, account, sdk } = useSDK();
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({ startDate: null, endDate: null });
+  const handleStartDateChange = (date: any) => {
+    setFormData({ ...formData, startDate: date });
+  };
+
+  const handleEndDateChange = (date: any) => {
+    setFormData({ ...formData, endDate: date });
+  };
 
   const createElection = async (event: SyntheticEvent<HTMLFormElement>) => {
     try {
@@ -22,21 +34,32 @@ export default function CreateElection() {
         // Initialize web3
         const web3 = new Web3(provider);
         // Initialize contract
-        const electionFactory = new web3.eth.Contract(ELECTION_FACTORY_ABI, getFactoryAddress(provider.getChainId()));
+        const electionFactory = new web3.eth.Contract(
+          ELECTION_FACTORY_ABI,
+          getFactoryAddress(provider.getChainId())
+        );
         // Invote method
-        const receipt = await electionFactory.methods.createElection(
-          formData.get('title'),
-          formData.get('description'),
-          formData.get('electionType') === 'public',
-          new Date(formData.get('startDate') as any).valueOf(),
-          new Date(formData.get('endDate') as any).valueOf()
-        ).send({ from: account });
+        const receipt = await electionFactory.methods
+          .createElection(
+            formData.get("title"),
+            formData.get("description"),
+            formData.get("electionType") === "public",
+            new Date(formData.get("startDate") as any).valueOf(),
+            new Date(formData.get("endDate") as any).valueOf()
+          )
+          .send({ from: account });
+        console.log(
+          "Receipt values",
+          receipt.events?.ElectionCreated?.returnValues
+        );
         // Navigate to detail page
         if (receipt.events?.ElectionCreated?.returnValues?.electionAddress) {
-          return router.push(`/elections/${receipt.events?.ElectionCreated?.returnValues?.electionAddress}`)
+          return router.push(
+            `/elections/${receipt.events?.ElectionCreated?.returnValues?.electionAddress}`
+          );
         } else {
           setLoading(false);
-          alert('You may have interacted with the wrong network');
+          alert("You may have interacted with the wrong network");
         }
       } else {
         setLoading(false);
@@ -47,7 +70,7 @@ export default function CreateElection() {
       setLoading(false);
       alert(error.message);
     }
-  }
+  };
 
   return (
     <form onSubmit={createElection}>
@@ -64,7 +87,8 @@ export default function CreateElection() {
           id="title"
           name="title"
           required
-          placeholder="Eg. 2024 SRC President - UG" />
+          placeholder="Eg. 2024 SRC President - UG"
+        />
       </div>
 
       <div className="mb-10">
@@ -90,18 +114,35 @@ export default function CreateElection() {
         </label>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
           {/* Start Date Picker */}
-          <input
+          {/* <input
             type="date"
             name="startDate"
             required
-            className="w-full sm:w-auto py-3 border border-gray-300 bg-[#070707] text-subtle-text rounded-lg px-4 focus:border-gray-300 focus:outline-none" />
+            className="w-full sm:w-auto py-3 border border-gray-300 bg-[#070707] text-subtle-text rounded-lg px-4 focus:border-gray-300 focus:outline-none"
+          /> */}
+          <DatePicker
+            onChange={handleStartDateChange}
+            name="startDate"
+            label="End Date"
+            className="max-w-[200px]"
+            isRequired
+          />
 
           {/* End Date Picker */}
-          <input
+          {/* <input
             type="date"
             name="endDate"
             required
-            className="w-full sm:w-auto py-3 border border-gray-300 bg-[#070707] text-subtle-text rounded-lg px-4 focus:border-gray-300 focus:outline-none" />
+            className="w-full sm:w-auto py-3 border border-gray-300 bg-[#070707] text-subtle-text rounded-lg px-4 focus:border-gray-300 focus:outline-none"
+          /> */}
+
+          <DatePicker
+            onChange={handleEndDateChange}
+            name="endDate"
+            label="End Date"
+            className="max-w-[200px]"
+            isRequired
+          />
         </div>
       </div>
 
@@ -119,7 +160,8 @@ export default function CreateElection() {
               required
               style={{
                 accentColor: "#4C9FE4",
-              }} />
+              }}
+            />
             Public
           </label>
           <label className="flex items-center text-subtle-text">
@@ -131,7 +173,8 @@ export default function CreateElection() {
               required
               style={{
                 accentColor: "#4C9FE4",
-              }} />
+              }}
+            />
             Private
           </label>
         </div>
