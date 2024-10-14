@@ -58,7 +58,7 @@ export default function AllElections() {
         <select
           value={searchType}
           onChange={(e) => setSearchType(e.target.value)}
-          className="py-2 px-4 h-11 w-[80%] md:w-[18%] lg:w-[10%] rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer transition-all duration-300 ease-in-out"
+          className="py-2 px-4 h-11 w-[80%] md:w-[18%] lg:w-[12%] rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer transition-all duration-300 ease-in-out"
         >
           <option value="all">All</option>
           <option value="public">Public</option>
