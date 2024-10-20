@@ -1,8 +1,5 @@
 "use client";
-import {
-  ELECTION_FACTORY_ABI,
-  getFactoryAddress,
-} from "@/contracts/ElectionFactory";
+import { ELECTION_FACTORY_ABI, getFactoryAddress } from "@/contracts/ElectionFactory";
 import { useSDK } from "@metamask/sdk-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -16,7 +13,7 @@ import { ELECTION_ABI } from "@/contracts/Election";
 interface Election {
   address: string;
   title: string;
-  type: string; 
+  type: string;
 }
 
 export default function AllElections() {
@@ -33,16 +30,13 @@ export default function AllElections() {
           ELECTION_FACTORY_ABI,
           getFactoryAddress(provider.getChainId())
         );
-
         try {
-          const addresses = await electionFactory.methods.getElections().call();
-
+          const addresses: string[] = await electionFactory.methods.getElections().call() as string[];
           // Fetch titles for each election
-          const fetchedElections = await Promise.all(
+          const fetchedElections: Election[] = await Promise.all(
             addresses.map(async (address: string) => {
               const election = new web3.eth.Contract(ELECTION_ABI, address);
-              const title = await election.methods.title().call();
-
+              const title: string = await election.methods.title().call();
               return {
                 address,
                 title, // Now using real titles fetched from the contract
@@ -50,28 +44,21 @@ export default function AllElections() {
               };
             })
           );
-
           setElections(fetchedElections);
         } catch (error) {
           console.error("Error fetching elections:", error);
         }
       }
     };
-
     fetchElections();
   }, [provider, connected, chainId]);
 
   // Filter elections based on search term and type
   const filteredElections = elections.filter((election) => {
-    const matchesSearchTerm = election.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesSearchType =
-      searchType === "all" || election.type === searchType;
-
+    const matchesSearchTerm = election.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearchType = searchType === "all" || election.type === searchType;
     return matchesSearchTerm && matchesSearchType;
   });
-
 
   return (
     <div className="flex flex-col gap-5 w-full">
@@ -90,7 +77,6 @@ export default function AllElections() {
             className="pl-10 px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-600 w-full bg-[#1B1A23] h-11"
           />
         </div>
-        
         <select
           value={searchType}
           onChange={(e) => setSearchType(e.target.value)}
@@ -101,7 +87,6 @@ export default function AllElections() {
           <option value="private">Private</option>
         </select>
       </div>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
         {filteredElections.map((election) => (
           <Link href={`/elections/${election.address}`} key={election.address}>
