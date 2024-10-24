@@ -11,8 +11,9 @@ const config = getDefaultConfig({
   appName: 'Auditable Voting Dapp',
   projectId: 'YOUR_PROJECT_ID', 
   chains: [mainnet, polygon, optimism, arbitrum, base],
-  ssr: true, 
 });
+
+
 
 export default function WalletProvider({
   children,
