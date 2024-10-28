@@ -1,13 +1,14 @@
 "use client";
 import { ELECTION_FACTORY_ABI, getFactoryAddress } from "@/contracts/ElectionFactory";
-import { useSDK } from "@metamask/sdk-react";
+import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
 import Web3 from "web3";
 
 export default function CreateElection() {
   const router = useRouter();
-  const { provider, connected, account, sdk } = useSDK();
+  const account = useAccount();
+  console.log(account);
   const [loading, setLoading] = useState(false);
 
   const createElection = async (event: SyntheticEvent<HTMLFormElement>) => {
@@ -15,12 +16,12 @@ export default function CreateElection() {
       // Prevent default form submit behaviour
       event.preventDefault();
       // Send transaction
-      if (connected && provider) {
+      if (account) {
         setLoading(true);
         // Use FormData API to collect data
         const formData = new FormData(event.currentTarget);
         // Initialize web3
-        const web3 = new Web3(provider);
+        const web3 = new Web3(account.connector?.getProvider);
         // Initialize contract
         const electionFactory = new web3.eth.Contract(ELECTION_FACTORY_ABI, getFactoryAddress(provider.getChainId()));
         // Invote method
@@ -47,6 +48,7 @@ export default function CreateElection() {
       setLoading(false);
       alert(error.message);
     }
+
   }
 
   return (
