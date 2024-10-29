@@ -1,13 +1,11 @@
-import { utils } from "web3";
-
-export const getFactoryAddress = (chainId: string) => {
+export const getFactoryAddress = (chainId: number) => {
   switch (chainId) {
-    case '11155111':
+    case 11155111:
       return '0x3e5213A1924b00f7aaAb88fBDF034a9910386FF1';
-    case '534351':
+    case 534351:
       return '0xF7E2Be9007fEaAcEB821D98011975A78034cCDC6';
     default:
-      return '';
+      return '0x0000000000000000000000000000000000000000';
   }
 }
 
