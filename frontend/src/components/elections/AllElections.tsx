@@ -1,8 +1,8 @@
 "use client";
 import { ELECTION_FACTORY_ABI, getFactoryAddress } from "@/contracts/ElectionFactory";
-import { useSDK } from "@metamask/sdk-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useAccount, useChainId } from "wagmi";
 import Web3 from "web3";
 import searchIcon from "../../../public/images/search-icon.svg";
 import Image from "next/image";
@@ -17,41 +17,44 @@ interface Election {
 }
 
 export default function AllElections() {
+  const chainId = useChainId();
+  const { connector } = useAccount();
   const [elections, setElections] = useState<Election[]>([]);
-  const { provider, connected, chainId } = useSDK();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("all");
 
-  useEffect(() => {
-    const fetchElections = async () => {
-      if (connected && provider) {
-        const web3 = new Web3(provider);
-        const electionFactory = new web3.eth.Contract(
-          ELECTION_FACTORY_ABI,
-          getFactoryAddress(provider.getChainId())
+  const fetchElections = async () => {
+    if (connector) {
+      // @ts-ignore
+      const web3 = new Web3(await connector.getProvider());
+      const electionFactory = new web3.eth.Contract(
+        ELECTION_FACTORY_ABI,
+        getFactoryAddress(chainId)
+      );
+      try {
+        const addresses: string[] = await electionFactory.methods.getElections().call() as string[];
+        // Fetch titles for each election
+        const fetchedElections: Election[] = await Promise.all(
+          addresses.map(async (address: string) => {
+            const election = new web3.eth.Contract(ELECTION_ABI, address);
+            const title: string = await election.methods.title().call();
+            return {
+              address,
+              title, // Now using real titles fetched from the contract
+              type: Math.random() > 0.5 ? "public" : "private", // Dummy type, update as necessary
+            };
+          })
         );
-        try {
-          const addresses: string[] = await electionFactory.methods.getElections().call() as string[];
-          // Fetch titles for each election
-          const fetchedElections: Election[] = await Promise.all(
-            addresses.map(async (address: string) => {
-              const election = new web3.eth.Contract(ELECTION_ABI, address);
-              const title: string = await election.methods.title().call();
-              return {
-                address,
-                title, // Now using real titles fetched from the contract
-                type: Math.random() > 0.5 ? "public" : "private", // Dummy type, update as necessary
-              };
-            })
-          );
-          setElections(fetchedElections);
-        } catch (error) {
-          console.error("Error fetching elections:", error);
-        }
+        setElections(fetchedElections);
+      } catch (error) {
+        console.error("Error fetching elections:", error);
       }
-    };
+    }
+  };
+
+  useEffect(() => {
     fetchElections();
-  }, [provider, connected, chainId]);
+  }, [chainId]);
 
   // Filter elections based on search term and type
   const filteredElections = elections.filter((election) => {

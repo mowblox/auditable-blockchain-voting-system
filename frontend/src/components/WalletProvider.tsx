@@ -1,5 +1,19 @@
 "use client";
-import { MetaMaskProvider } from "@metamask/sdk-react";
+import '@rainbow-me/rainbowkit/styles.css';
+import { darkTheme, getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { sepolia, scrollSepolia } from 'wagmi/chains';
+
+const queryClient = new QueryClient();
+
+const config = getDefaultConfig({
+  appName: 'Auditable Voting Dapp',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [sepolia, scrollSepolia]
+});
+
+
 
 export default function WalletProvider({
   children,
@@ -7,21 +21,12 @@ export default function WalletProvider({
   children: React.ReactNode;
 }>) {
   return (
-    <MetaMaskProvider
-      sdkOptions={{
-        dappMetadata: {
-          name: "Auditable Voting Dapp",
-          url: 'https://abvs.vercel.app',
-        },
-        readonlyRPCMap: {
-          "0xaa36a7": "https://ethereum-sepolia-rpc.publicnode.com",
-          "0x8274f": "`https://sepolia-rpc.scroll.io",
-          "0xe705": "https://rpc.sepolia.linea.build",
-        }
-      }}
-      debug={false}
-    >
-      {children}
-    </MetaMaskProvider>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider theme={darkTheme()}>
+          {children}
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }

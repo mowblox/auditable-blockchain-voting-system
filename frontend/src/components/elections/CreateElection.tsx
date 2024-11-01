@@ -1,13 +1,14 @@
 "use client";
 import { ELECTION_FACTORY_ABI, getFactoryAddress } from "@/contracts/ElectionFactory";
-import { useSDK } from "@metamask/sdk-react";
+import { useChainId, useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useState } from "react";
 import Web3 from "web3";
 
 export default function CreateElection() {
   const router = useRouter();
-  const { provider, connected, account, sdk } = useSDK();
+  const chainId = useChainId();
+  const { connector, address } = useAccount();
   const [loading, setLoading] = useState(false);
 
   const createElection = async (event: SyntheticEvent<HTMLFormElement>) => {
@@ -15,14 +16,15 @@ export default function CreateElection() {
       // Prevent default form submit behaviour
       event.preventDefault();
       // Send transaction
-      if (connected && provider) {
+      if (connector) {
         setLoading(true);
         // Use FormData API to collect data
         const formData = new FormData(event.currentTarget);
         // Initialize web3
-        const web3 = new Web3(provider);
+        // @ts-ignore
+        const web3 = new Web3(await connector.getProvider());
         // Initialize contract
-        const electionFactory = new web3.eth.Contract(ELECTION_FACTORY_ABI, getFactoryAddress(provider.getChainId()));
+        const electionFactory = new web3.eth.Contract(ELECTION_FACTORY_ABI, getFactoryAddress(chainId));
         // Invote method
         const receipt = await electionFactory.methods.createElection(
           formData.get('title'),
@@ -30,7 +32,7 @@ export default function CreateElection() {
           formData.get('electionType') === 'public',
           new Date(formData.get('startDate') as any).valueOf(),
           new Date(formData.get('endDate') as any).valueOf()
-        ).send({ from: account });
+        ).send({ from: address });
         // Navigate to detail page
         if (receipt.events?.ElectionCreated?.returnValues?.electionAddress) {
           return router.push(`/elections/${receipt.events?.ElectionCreated?.returnValues?.electionAddress}`)
@@ -40,7 +42,6 @@ export default function CreateElection() {
         }
       } else {
         setLoading(false);
-        await sdk?.connect();
       }
     } catch (error: any) {
       // console.log(error);
