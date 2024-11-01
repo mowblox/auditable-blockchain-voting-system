@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <div className="w-[80%] m-auto lg:mt-20">
+    <div className="w-[90%] m-auto lg:mt-20">
       <div className="w-[80%] lg:w-[30%] mb-10 flex flex-col text-center m-auto md:m-0 md:text-start md:mb-10">
         <Image src="/images/logo.png" alt="Logo" width={100} height={36} className="self-center md:self-start" />
         <p className="text-subtle-text mt-6">
