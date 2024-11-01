@@ -19,7 +19,7 @@ const config: HardhatUserConfig = {
     },
     ethereum_mainnet: {
       url: `https://ethereum-rpc.publicnode.com`,
-      accounts: [process.env.PRIVATE_KEY as string],
+      accounts: [process.env.MAINNET_PRIVATE_KEY as string],
     },
     linea_sepolia: {
       url: `https://rpc.sepolia.linea.build`,
