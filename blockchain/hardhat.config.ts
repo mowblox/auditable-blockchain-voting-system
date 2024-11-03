@@ -37,6 +37,10 @@ const config: HardhatUserConfig = {
       url: `https://rpc.scroll.io/`,
       accounts: [process.env.PRIVATE_KEY as string],
     },
+    holesky: {
+      url: 'https://1rpc.io/holesky',
+      accounts: [process.env.PRIVATE_KEY as string]
+    }
   },
   etherscan: {
     apiKey: {
@@ -44,6 +48,7 @@ const config: HardhatUserConfig = {
       linea: process.env.LINEA_API_KEY as string,
       scroll: process.env.SCROLL_API_KEY as string,
       scroll_sepolia: process.env.SCROLL_API_KEY as string,
+      holesky: process.env.ETHERSCAN_API_KEY as string
     },
     customChains: [
       {
