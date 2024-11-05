@@ -1,17 +1,15 @@
-import { utils } from "web3";
-
-export const getFactoryAddress = (chainId: string) => {
+export const getFactoryAddress = (chainId: number) => {
   switch (chainId) {
-    case utils.toHex(11155111):
+    case 11155111:
       return '0xe96e8F2A1A3c4a6464d51a645CFFA3306c16c456'; //sepolia
-    case utils.toHex(534351):
+    case 534351:
       return '0xa5d67391AC8d560B5f94175868961C306942cF59'; //linea
-    case utils.toHex(59141):
+    case 59141:
       return '0xa5d67391AC8d560B5f94175868961C306942cF59' //scroll
-    case utils.toHex(17000):
+    case 17000:
       return '0xDdF0f6f45d7Ee134779C6c05c7eE6a9231BD8Aea' //holesky
     default:
-      return '';
+      return '0x0000000000000000000000000000000000000000';
   }
 }
 
