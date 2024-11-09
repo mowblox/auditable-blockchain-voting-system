@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import heroIcon from "../../public/images/hero-bg.png";
 import underline from "../../public/images/white-underline.png";
@@ -16,8 +17,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import BlurIn from "@/components/ui/blur-in";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import { useAccount } from "wagmi";
+import { toast } from "sonner";
 
 export default function LandingPage() {
+  const { connector } = useAccount();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   return (
@@ -57,8 +62,16 @@ export default function LandingPage() {
               <LoadingSpinner className="mt-2" />
             ) : (
               <Link
-                href={"/elections/add"}
-                onClick={() => setLoading(true)}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (connector) {
+                    setLoading(true);
+                    router.push("/elections/add");
+                  } else {
+                    toast.info("Please log in or connect your wallet first");
+                  }
+                }}
                 className="py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer"
               >
                 create election
