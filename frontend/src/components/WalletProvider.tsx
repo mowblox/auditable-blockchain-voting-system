@@ -1,41 +1,42 @@
+"use client";
 import '@rainbow-me/rainbowkit/styles.css';
-import { darkTheme, RainbowKitProvider, connectorsForWallets } from '@rainbow-me/rainbowkit';
-import { createConfig} from 'wagmi';
+import { darkTheme, getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { rainbowWeb3AuthConnector } from "./RainbowWeb3AuthConnector";
+import { WagmiProvider, http } from 'wagmi';
+import { rainbowWallet, metaMaskWallet } from '@rainbow-me/rainbowkit/wallets';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { sepolia, scrollSepolia } from 'wagmi/chains';
-import { rainbowMagicConnector } from './RainbowMagicConnector';
-import { WagmiProvider } from 'wagmi';
+import { sepolia, scrollSepolia, mainnet } from 'wagmi/chains';
 
 const queryClient = new QueryClient();
 
-const chains = [sepolia, scrollSepolia];
-
-const connectors = connectorsForWallets(
-  [
-    {
-      groupName: 'Recommended',
-      wallets: [rainbowMagicConnector({ chains }) as any],
-    }
-  ],
-  {
-    projectId: 'your_project_id', 
-    appName: 'TrueCast',
-  }
-);
-
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors,         
-  chains: [sepolia, scrollSepolia],  
+const config = getDefaultConfig({
+  appName: 'TrueCast',
+  projectId: process.env.NEXT_PUBLIC_MAGIC_API_KEY || "", 
+  chains: [mainnet, sepolia, scrollSepolia],
+  transports: {
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
+    [scrollSepolia.id]: http(),
+  },
+  wallets: [{
+    groupName: 'Recommended',
+    wallets: [
+      rainbowWallet,
+      rainbowWeb3AuthConnector,
+      metaMaskWallet,
+    ],
+  }],
 });
 
 export default function WalletProvider({
   children,
-}: { children: React.ReactNode }) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <WagmiProvider config={wagmiConfig}>
+    <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider chains={chains} theme={darkTheme()}>
+        <RainbowKitProvider theme={darkTheme()}>
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>
