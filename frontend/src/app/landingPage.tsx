@@ -1,6 +1,6 @@
 "use client";
 
-import { Metadata } from "next";
+import { useState } from "react";
 import Image from "next/image";
 import heroIcon from "../../public/images/hero-bg.png";
 import underline from "../../public/images/white-underline.png";
@@ -13,12 +13,13 @@ import smile from "../../public/images/smiley-illus.png";
 import cardGradient from "../../public/images/card-gradient.png";
 import gradient2 from "../../public/images/Gradient-2.png";
 import Link from "next/link";
-import {
-  motion,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import BlurIn from "@/components/ui/blur-in";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default function LandingPage() {
+  const [loading, setLoading] = useState(false);
+
   return (
     <div className="relative pb-52 text-text">
       <Image
@@ -52,12 +53,18 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Link
-              href={"/elections/add"}
-              className="py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer"
-            >
-              create election
-            </Link>
+            {loading ? (
+              <LoadingSpinner className="mt-2" />
+            ) : (
+              <Link
+                href={"/elections/add"}
+                onClick={() => setLoading(true)}
+                className="py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer"
+              >
+                create election
+              </Link>
+            )}
+
             <Link
               href={"/elections"}
               className="bg-dark border border-white py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] hover:bg-[#939393] cursor-pointer"

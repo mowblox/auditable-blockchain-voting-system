@@ -83,4 +83,38 @@ select:focus {
   }
 }
 
+.PopoverContent {
+	animation-duration: 0.6s;
+	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.PopoverContent[data-side="top"] {
+	animation-name: slideUp;
+}
+.PopoverContent[data-side="bottom"] {
+	animation-name: slideDown;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideUp {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
 @layer components { .loader { @apply w-12 aspect-square rounded-full border-8 border-none border-r-[#ffa50097] relative animate-l24; } .loader:before, .loader:after { content: ""; @apply absolute inset-[-8px] rounded-full animate-l24Slow; } .loader:after { @apply animate-l24Slower; } }
