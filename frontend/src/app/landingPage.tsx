@@ -69,7 +69,7 @@ export default function LandingPage() {
                     setLoading(true);
                     router.push("/elections/add");
                   } else {
-                    toast.info("Please log in or connect your wallet first");
+                    toast.warning("Please log in or connect your wallet first");
                   }
                 }}
                 className="py-2 px-4 md:py-2 md:px-6 rounded-3xl w-[140px] md:w-[160px] lg:w-[180px] bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer"

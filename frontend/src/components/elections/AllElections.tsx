@@ -38,7 +38,7 @@ export default function AllElections() {
 
   const fetchElections = async () => {
     if (!connector) {
-      toast.error("Please connect your wallet to view elections.");
+      toast.warning("Please connect your wallet to view elections.");
       setLoading(false); // Stop loading if no connector
       return;
     }
