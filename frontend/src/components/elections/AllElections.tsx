@@ -104,7 +104,7 @@ export default function AllElections() {
             className="pl-10 px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-600 w-full bg-[#1B1A23] h-11"
           />
         </div>
-        <Select value={searchType} onValueChange={(value) => setSearchType(value)}>
+        <Select value={searchType} onValueChange={(value: string) => setSearchType(value)}>
           <SelectTrigger className="py-2 px-4 h-11 w-[80%] md:w-[18%] lg:w-[12%] rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-600 bg-gradient-to-r from-primary to-[#4595DF] hover:from-[#4595DF] hover:to-primary cursor-pointer transition-all duration-300 ease-in-out">
             <SelectValue placeholder="Select type" />
           </SelectTrigger>
