@@ -7,9 +7,9 @@ import Link from "next/link";
 export default function Header() {
 
   return (
-    <header>
-      <nav className=" bg-dark px-4 lg:px-6 py-2.5 justify-center ">
-        <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center mx-auto w-[90%]">
+    <header className='mx-auto w-[90%]'>
+      <nav className=" bg-dark py-2.5 justify-center ">
+        <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center ">
           <Link href="/">
             <Image
               src="/images/logo.png"
