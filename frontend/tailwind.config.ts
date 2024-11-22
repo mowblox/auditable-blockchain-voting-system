@@ -20,8 +20,14 @@ const config: Config = {
       sans: ["var(--font-roboto-flex)"],
       "space-grotesk": ["var(--font-space-grotesk)"],
       "roboto-flex": ["var(--font-roboto-flex)"],
+      "afacad": ["var(--font-afacad)"],
     },
     extend: {
+      screens: {
+        'xs': "375px",
+        '2xl': '1536px',
+        '3xl': '1920px',
+      },
       keyframes: { l24: { "100%": { transform: "rotate(1turn)" } } },
       animation: {
         l24: "l24 1s linear infinite",
