@@ -8,6 +8,9 @@ import creya from "../../public/images/creya.png";
 import sheild from "../../public/images/Shield.svg";
 import lighting from "../../public/images/Lightning.svg";
 import user from "../../public/images/User.svg";
+import gradient from "../../public/images/Gradient.png";
+import eclipse from "../../public/images/Gradient-2.png";
+import eclipse2 from "../../public/images/card-gradient.png";
 
 const waitListPage = () => {
   return (
@@ -66,6 +69,7 @@ const waitListPage = () => {
           Your elections{" "}
           <span className="text-primary">secured, anywhere, anytime.</span>
         </h1>
+          <Image src={gradient} alt="eclipse" className="absolute left-0"/>
         <div className="flex justify-between w-[80%]">
           <div className="flex flex-col gap-4">
             <h1 className="text-3xl font-bold">Bulletproof Security</h1>
@@ -100,10 +104,12 @@ const waitListPage = () => {
             </p>
           </div>
           <Image src={user} alt="User" />
+          <Image src={eclipse} alt="eclipse" className="absolute left-0"/>
         </div>
       </section>
 
-      <section className="w-[80%] m-auto flex justify-center">
+      <section className="w-[80%] m-auto flex justify-center mb-28">
+      <Image src={eclipse2} alt="eclipse" className="absolute right-0 w-[25%]"/>
         <div className="w-[50%] flex flex-col gap-4">
           <h1 className="text-3xl w-[80%] mx-auto text-center font-bold">
             Ready to experience{" "}
