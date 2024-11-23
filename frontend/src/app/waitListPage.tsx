@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, FormEvent, useRef } from "react";
 import Image from "next/image";
 import bell from "../../public/images/bell.png";
 import { Separator } from "@radix-ui/react-select";
@@ -13,175 +13,216 @@ import gradient from "../../public/images/Gradient.png";
 import eclipse from "../../public/images/Gradient-2.png";
 import eclipse2 from "../../public/images/card-gradient.png";
 import background from "../../public/images/hero_bg.svg";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
+import emailjs from "emailjs-com";
+import { toast } from "sonner";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
 const waitListPage = () => {
+  const [email, setEmail] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const result = await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current!,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      if (result.status === 200) {
+        toast.success("You have been added to the waitlist!");
+        setEmail("");
+      } else {
+        throw new Error(result.text || "Something went wrong");
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message || "Failed to add to the waitlist.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     Aos.init();
   }, []);
 
   return (
-    <div className="w-[90%] m-auto flex flex-col gap-28">
-      <section className="items-center flex flex-col gap-28">
-        <div className="flex flex-col items-center w-[40%]">
+    <div className=" m-auto flex flex-col gap-16 lg:gap-28 relative">
+      {/* Hero Section */}
+      <section className="items-center flex flex-col gap-16 lg:gap-28 ">
+        <div className="flex flex-col items-center w-[80%] lg:w-[60%] xl:w-[50%] text-center">
           <Image
             src={background}
             alt="Background"
-            className="absolute w-full -z-10 lg:-mt-[420px] "
+            className="absolute w-full -z-10 mt-16 sm:-mt-[50px] md:-mt-[150px] lg:-mt-[300px] xl:-mt-[100px] 2xl:-mt-[400px]"
           />
-          <h1 className="text-7xl font-bold text-center font-afacad">
+          <h1 className="text-[50px] lg:text-7xl xl:text-5xl 2xl:text-9xl font-bold font-afacad">
             Future Of Fair Elections
           </h1>
-          <p className="text-center mt-6 w-[80%] font-afacad text-subtle-text leading-loose">
+          <p className="mt-4 lg:mt-6 w-full md:w-[60%] lg:w-[80%] 2xl:w-[70%] lg:text-xl xl:text-2xl font-afacad text-subtle-text leading-loose">
             Remember that feeling after casting your vote? That moment of "I
             hope it makes it"? Yeah, we weren't fans either. That's why we’re
             building something better.
           </p>
-          <form className="flex py-2 px-2 rounded-full bg-[#07070729] align-middle items-center w-full mt-12  focus-within:border-primary focus-within:ring-1 focus-within:ring-primary ">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="flex flex-col lg:flex-row py-2 px-2 rounded-3xl lg:rounded-full bg-[#07070729] items-center w-full md:w-[70%] mt-8 lg:mt-12 xl:mt-20 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary"
+          >
             <input
               type="email"
+              name="user_email"
               placeholder="Email address"
-              className="w-full bg-[#07070702] font-afacad rounded-full p-3 focus:outline-none focus:[#0707074D] "
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-[#07070702] font-afacad rounded-full p-3 focus:outline-none focus:[#0707074D]"
             />
             <button
               type="submit"
-              className="bg-primary text-white w-[50%] font-afacad p-3 rounded-full focus:outline-none hover:from-[#ffffff] hover:to-primary"
+              className="bg-primary text-white w-full lg:w-[50%] font-afacad p-3 rounded-full mt-4 lg:mt-0 lg:ml-4 focus:outline-none hover:from-[#ffffff] hover:to-primary"
             >
-              Get notified
-              <Image
-                src={bell}
-                alt="Notification bell"
-                width={20}
-                height={20}
-                className="inline ml-2"
-              />
+              {loading ? (
+                <LoadingSpinner className="mx-auto sm:w-auto" />
+              ) : (
+                <>
+                  Get notified
+                  <Image
+                    src={bell}
+                    alt="Notification bell"
+                    width={20}
+                    height={20}
+                    className="inline ml-2"
+                  />
+                </>
+              )}
             </button>
           </form>
         </div>
+
+        {/* Support Section */}
         <div className="flex flex-col gap-4 items-center">
-          <h1 className="font-afacad">Support by</h1>
-          <div className="flex items-center space-x-12">
+          <h1 className="font-afacad text-xl lg:text-2xl">Support by</h1>
+          <div className="flex flex-wrap items-center justify-center gap-6 lg:space-x-12">
             <Image src={mowblox} alt="Mowblox" width={100} height={100} />
-            <Separator
-              data-orientation="vertical"
-              className="w-[1px] h-4 bg-subtle-text"
-            />
+            <Separator className="hidden lg:block w-[1px] h-4 bg-subtle-text" />
             <Image src={scroll} alt="Scroll" width={100} height={100} />
-            <Separator
-              data-orientation="vertical"
-              className="w-[1px] h-4 bg-subtle-text"
-            />
+            <Separator className="hidden lg:block w-[1px] h-4 bg-subtle-text" />
             <Image src={creya} alt="Creya" width={100} height={100} />
           </div>
         </div>
       </section>
 
-      <section className="flex flex-col items-center gap-28">
-        <h1 className="text-3xl font-afacad font-bold text-center w-[40%]">
+      {/* Features Section */}
+      <section className="flex flex-col items-center gap-16 lg:gap-28">
+        <h1 className="text-2xl md:text-3xl font-afacad font-bold text-center w-full md:w-[60%] lg:w-[40%]">
           Your elections{" "}
           <span className="text-primary">secured, anywhere, anytime.</span>
         </h1>
-        <Image src={gradient} alt="eclipse" className="absolute left-0" />
         <div
           data-aos="fade-in"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          data-aos-once="false"
-          className="flex justify-between w-[80%]"
+          className="flex flex-col lg:flex-row items-center lg:justify-between w-[80%] gap-8 lg:gap-0"
         >
-          <div className="flex flex-col gap-4">
-            <h1 className="text-3xl font-afacad font-bold">Bulletproof Security</h1>
-            <p className="text-subtle-text font-afacad w-[60%] leading-loose">
+          <div className="flex flex-col items-center lg:items-start gap-4 md:w-[70%] lg:w-[50%]">
+            <h1 className="text-xl lg:text-3xl font-afacad font-bold">
+              Bulletproof Security
+            </h1>
+            <p className="text-subtle-text text-center lg:text-start font-afacad leading-loose">
               Each vote is sealed with blockchain technology, making tampering
               impossible. Trust isn't promised – it's guaranteed.
             </p>
           </div>
-          <Image src={sheild} alt="Sheild" />
+          <Image src={sheild} alt="Shield" className="w-24 lg:w-auto" />
         </div>
 
         <div
           data-aos="fade-in"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          data-aos-once="false"
-          className="flex justify-between w-[80%]"
+          className="flex flex-col-reverse lg:flex-row items-center lg:justify-between w-[80%] gap-8 lg:gap-0"
         >
-          <Image src={lighting} alt="Lighting" />
-          <div className="w-[50%] items-end">
-            <div className="flex flex-col gap-4  ">
-              <h1 className="text-3xl font-afacad font-bold">Real-Time Tracking</h1>
-              <p className="text-subtle-text font-afacad w-[80%] leading-loose">
-                Watch results roll in live. Our blockchain tech guarantees every
-                vote counts, securing a transparent and trustworthy election
-                process.
-              </p>
-            </div>
+          <Image src={lighting} alt="Lighting" className="w-24 lg:w-auto" />
+          <div className="flex flex-col items-center lg:items-end gap-4 md:w-[70%] lg:w-[50%]">
+            <h1 className="text-xl lg:text-3xl font-afacad font-bold">
+              Real-Time Tracking
+            </h1>
+            <p className="text-subtle-text text-center lg:text-end font-afacad leading-loose">
+              Watch results roll in live. Our blockchain tech guarantees every
+              vote counts, securing a transparent and trustworthy election
+              process.
+            </p>
           </div>
         </div>
 
-        <div className="flex justify-between w-[80%]">
-          <div
-            data-aos="fade-in"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
-            data-aos-once="false"
-            className="flex"
-          >
-            <div className="flex flex-col gap-4">
-            <h1 className="text-3xl font-afacad font-bold">Voter Verification</h1>
-            <p className="text-subtle-text font-afacad w-[60%] leading-loose">
+        <div
+          data-aos="fade-in"
+          className="flex flex-col lg:flex-row items-center lg:justify-between w-[80%] gap-8 lg:gap-0"
+        >
+          <div className="flex flex-col items-center lg:items-start gap-4 md:w-[70%] lg:w-[50%]">
+            <h1 className="text-xl lg:text-3xl font-afacad font-bold">
+              Voter Verification
+            </h1>
+            <p className="text-subtle-text text-center lg:text-start font-afacad leading-loose">
               Import your voter list, send invitations, and let the system
               handle verification. Democracy has never been this easy.
             </p>
-            </div>
-            <Image src={user} alt="User" />
           </div>
+          <Image src={user} alt="User" className="w-24 lg:w-auto" />
         </div>
-        <Image src={eclipse} alt="eclipse" className="absolute left-0" />
       </section>
 
-      <section className="w-[80%] m-auto flex justify-center mb-28">
-        <Image
-          src={eclipse2}
-          alt="eclipse"
-          className="absolute right-0 w-[25%]"
-        />
+      {/* Final CTA Section */}
+      <section className="w-[80%] m-auto flex flex-col items-center gap-16 lg:gap-28 mb-20">
         <div
           data-aos="fade-up"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          data-aos-once="false"
-          className="w-[50%] flex flex-col gap-4"
+          className="flex flex-col items-center gap-4 lg:gap-6 w-full lg:w-[70%] xl:w-[50%]"
         >
-          <h1 className="text-3xl w-[80%] font-afacad mx-auto text-center font-bold">
+          <h1 className="text-xl lg:text-3xl w-[70%] font-afacad font-bold text-center">
             Ready to experience{" "}
             <span className="text-primary">the future of voting?</span>
           </h1>
-          <p className="text-center font-afacad text-subtle-text leading-loose">
+          <p className="text-center w-[70%] font-afacad text-subtle-text leading-loose">
             Be one of the first to bring secure, modern elections to your
             organization or community. Drop your email below to get early access
             to our platform.
           </p>
-
-          <form className="flex py-2 px-2 rounded-full bg-[#1D57C21A] align-middle items-center w-full mt-12  focus-within:border-primary focus-within:ring-1 focus-within:ring-primary ">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="flex flex-col lg:flex-row py-2 px-2 rounded-3xl lg:rounded-full bg-[#1D57C21A] items-center w-full md:w-[70%] mt-8 lg:mt-12 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary"
+          >
             <input
               type="email"
+              name="user_email"
               placeholder="Email address"
-              className="w-full font-afacad bg-[#0707074D] rounded-full p-3 focus:outline-none focus:[#0707074D] "
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-[#07070702] font-afacad rounded-full p-3 focus:outline-none"
             />
             <button
               type="submit"
-              className="bg-primary font-afacad text-white w-[50%] p-3 rounded-full focus:outline-none hover:from-[#ffffff] hover:to-primary"
+              className="bg-primary text-white w-full lg:w-[50%] font-afacad p-3 rounded-full mt-4 lg:mt-0 lg:ml-4 focus:outline-none hover:from-[#ffffff] hover:to-primary"
             >
-              Get notified
-              <Image
-                src={bell}
-                alt="Notification bell"
-                width={20}
-                height={20}
-                className="inline ml-2"
-              />
+              {loading ? (
+                <LoadingSpinner className="mx-auto sm:w-auto" />
+              ) : (
+                <>
+                  Get notified
+                  <Image
+                    src={bell}
+                    alt="Notification bell"
+                    width={20}
+                    height={20}
+                    className="inline ml-2"
+                  />
+                </>
+              )}
             </button>
           </form>
         </div>
