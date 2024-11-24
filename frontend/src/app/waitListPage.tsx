@@ -19,7 +19,7 @@ import { toast } from "sonner";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-const waitListPage = () => {
+const WaitListPage = () => {
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -63,20 +63,20 @@ const waitListPage = () => {
           <Image
             src={background}
             alt="Background"
-            className="absolute w-full -z-10 mt-16 sm:-mt-[50px] md:-mt-[150px] lg:-mt-[300px] xl:-mt-[100px] 2xl:-mt-[400px]"
+            className="absolute w-full -z-10 mt-16 sm:-mt-[50px] md:-mt-[100px] lg:-mt-[350px]  "
           />
-          <h1 className="text-[50px] lg:text-7xl xl:text-5xl 2xl:text-9xl font-bold font-afacad">
+          <h1 className="text-[50px] lg:text-8xl font-bold font-afacad">
             Future Of Fair Elections
           </h1>
-          <p className="mt-4 lg:mt-6 w-full md:w-[60%] lg:w-[80%] 2xl:w-[70%] lg:text-xl xl:text-2xl font-afacad text-subtle-text leading-loose">
-            Remember that feeling after casting your vote? That moment of "I
-            hope it makes it"? Yeah, we weren't fans either. That's why we’re
-            building something better.
+          <p className="mt-4 lg:mt-6 w-full md:w-[60%] lg:w-[80%] 2xl:w-[70%] lg:text-xl font-afacad text-subtle-text leading-loose">
+            Remember that feeling after casting your vote? That moment of
+            &quot;I hope it makes it&quot;? Yeah, we weren&apos;t fans either.
+            That&apos;s why we’re building something better.
           </p>
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="flex flex-col lg:flex-row py-2 px-2 rounded-3xl lg:rounded-full bg-[#07070729] items-center w-full md:w-[70%] mt-8 lg:mt-12 xl:mt-20 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary"
+            className="flex flex-col lg:flex-row py-2 px-2 rounded-3xl lg:rounded-full bg-[#07070729] items-center w-full md:w-[70%] mt-6 lg:mt-12 xl:mt-20 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary"
           >
             <input
               type="email"
@@ -127,9 +127,14 @@ const waitListPage = () => {
           Your elections{" "}
           <span className="text-primary">secured, anywhere, anytime.</span>
         </h1>
+
+        <Image src={gradient} alt="eclipse" className="absolute left-0" />
         <div
           data-aos="fade-in"
-          className="flex flex-col lg:flex-row items-center lg:justify-between w-[80%] gap-8 lg:gap-0"
+          data-aos-duration="1500"
+          data-aos-easing="ease-in-out"
+          data-aos-once="false"
+          className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-between w-[70%] gap-8 lg:gap-0"
         >
           <div className="flex flex-col items-center lg:items-start gap-4 md:w-[70%] lg:w-[50%]">
             <h1 className="text-xl lg:text-3xl font-afacad font-bold">
@@ -137,7 +142,7 @@ const waitListPage = () => {
             </h1>
             <p className="text-subtle-text text-center lg:text-start font-afacad leading-loose">
               Each vote is sealed with blockchain technology, making tampering
-              impossible. Trust isn't promised – it's guaranteed.
+              impossible. Trust isn&#39;t promised – it&#39;s guaranteed.
             </p>
           </div>
           <Image src={sheild} alt="Shield" className="w-24 lg:w-auto" />
@@ -145,7 +150,10 @@ const waitListPage = () => {
 
         <div
           data-aos="fade-in"
-          className="flex flex-col-reverse lg:flex-row items-center lg:justify-between w-[80%] gap-8 lg:gap-0"
+          data-aos-duration="1500"
+          data-aos-easing="ease-in-out"
+          data-aos-once="false"
+          className="flex flex-col-reverse lg:flex-row items-center lg:items-start lg:justify-between w-[70%] gap-8 lg:gap-0"
         >
           <Image src={lighting} alt="Lighting" className="w-24 lg:w-auto" />
           <div className="flex flex-col items-center lg:items-end gap-4 md:w-[70%] lg:w-[50%]">
@@ -162,25 +170,39 @@ const waitListPage = () => {
 
         <div
           data-aos="fade-in"
-          className="flex flex-col lg:flex-row items-center lg:justify-between w-[80%] gap-8 lg:gap-0"
+          data-aos-duration="1500"
+          data-aos-easing="ease-in-out"
+          data-aos-once="false"
+          className=" w-full relative"
         >
-          <div className="flex flex-col items-center lg:items-start gap-4 md:w-[70%] lg:w-[50%]">
-            <h1 className="text-xl lg:text-3xl font-afacad font-bold">
-              Voter Verification
-            </h1>
-            <p className="text-subtle-text text-center lg:text-start font-afacad leading-loose">
-              Import your voter list, send invitations, and let the system
-              handle verification. Democracy has never been this easy.
-            </p>
+          <Image src={eclipse} alt="eclipse" className="absolute left-0" />
+          <div className="w-[70%] mx-auto flex flex-col lg:flex-row items-center lg:items-start lg:justify-between gap-8 lg:gap-0">
+            <div className="flex flex-col items-center lg:items-start gap-4 md:w-[70%] lg:w-[50%]">
+              <h1 className="text-xl lg:text-3xl font-afacad font-bold">
+                Voter Verification
+              </h1>
+              <p className="text-subtle-text text-center lg:text-start font-afacad leading-loose">
+                Import your voter list, send invitations, and let the system
+                handle verification. Democracy has never been this easy.
+              </p>
+            </div>
+            <Image src={user} alt="User" className="w-24 lg:w-auto" />
           </div>
-          <Image src={user} alt="User" className="w-24 lg:w-auto" />
         </div>
       </section>
 
       {/* Final CTA Section */}
       <section className="w-[80%] m-auto flex flex-col items-center gap-16 lg:gap-28 mb-20">
+        <Image
+          src={eclipse2}
+          alt="eclipse"
+          className="absolute right-0 w-[25%]"
+        />
         <div
           data-aos="fade-up"
+          data-aos-duration="1500"
+          data-aos-easing="ease-in-out"
+          data-aos-once="false"
           className="flex flex-col items-center gap-4 lg:gap-6 w-full lg:w-[70%] xl:w-[50%]"
         >
           <h1 className="text-xl lg:text-3xl w-[70%] font-afacad font-bold text-center">
@@ -231,4 +253,4 @@ const waitListPage = () => {
   );
 };
 
-export default waitListPage;
+export default WaitListPage;
