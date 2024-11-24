@@ -63,7 +63,7 @@ const WaitListPage = () => {
           <Image
             src={background}
             alt="Background"
-            className="absolute w-full -z-10 mt-16 sm:-mt-[50px] md:-mt-[150px] lg:-mt-[250px] xl:-mt-[350px] 2xl:-mt-[500px] "
+            className="absolute w-full -z-10 mt-16 xs:mt-[130px] sm:-mt-[50px] md:-mt-[150px] lg:-mt-[250px] xl:-mt-[350px] 2xl:-mt-[500px] "
           />
           <h1 className="text-[50px] lg:text-8xl 2xl:text-9xl font-bold font-afacad">
             Future Of Fair Elections
@@ -205,11 +205,11 @@ const WaitListPage = () => {
           data-aos-once="false"
           className="flex flex-col items-center gap-4 lg:gap-6 w-full lg:w-[70%] xl:w-[50%]"
         >
-          <h1 className="text-xl lg:text-3xl 2xl:text-4xl w-[70%] font-afacad font-bold text-center">
+          <h1 className="text-xl lg:text-3xl 2xl:text-4xl lg:w-[70%] font-afacad font-bold text-center">
             Ready to experience{" "}
             <span className="text-primary">the future of voting?</span>
           </h1>
-          <p className="text-center w-[70%] font-afacad text-subtle-text leading-loose xl:text-xl  2xl:text-2xl">
+          <p className="text-center lg:w-[70%] font-afacad text-subtle-text leading-loose xl:text-xl  2xl:text-2xl">
             Be one of the first to bring secure, modern elections to your
             organization or community. Drop your email below to get early access
             to our platform.

@@ -5,10 +5,10 @@ export default function Footer() {
     <div className=" m-auto flex flex-col items-center lg:mt-20">
       <div className="w-[80%] m-auto lg:w-[30%] mb-10 flex flex-col items-center text-center md:mb-10 gap-4">
         <Image src="/images/truecast-logo.svg" alt="Logo" width={150} height={36} className="self-center cursor-pointer" />
-        <p className="text-subtle-text text-xl mt-6">
+        <p className="text-subtle-text lg:text-xl mt-6">
           Secure, Transparent, and Fair Voting for Everyone
         </p>
-        <ul className="flex list-none font-afacad gap-6 text-primary text-2xl">
+        <ul className="flex list-none font-afacad gap-6 text-primary lg:text-2xl">
           <li className="hover:text-[#ffff] cursor-pointer"><a>linkedin</a></li>
           <li className="hover:text-[#ffff] cursor-pointer"><a>X (Twitter)</a></li>
           <li className="hover:text-[#ffff] cursor-pointer"><a>Email</a></li>
