@@ -63,12 +63,12 @@ const WaitListPage = () => {
           <Image
             src={background}
             alt="Background"
-            className="absolute w-full -z-10 mt-16 sm:-mt-[50px] md:-mt-[100px] lg:-mt-[350px]  "
+            className="absolute w-full -z-10 mt-16 sm:-mt-[50px] md:-mt-[150px] lg:-mt-[250px] xl:-mt-[350px] 2xl:-mt-[500px] "
           />
-          <h1 className="text-[50px] lg:text-8xl font-bold font-afacad">
+          <h1 className="text-[50px] lg:text-8xl 2xl:text-9xl font-bold font-afacad">
             Future Of Fair Elections
           </h1>
-          <p className="mt-4 lg:mt-6 w-full md:w-[60%] lg:w-[80%] 2xl:w-[70%] lg:text-xl font-afacad text-subtle-text leading-loose">
+          <p className="mt-4 lg:mt-6 w-full md:w-[60%] lg:w-[80%] 2xl:w-[70%] lg:text-xl xl:text-2xl 3xl:text-2xl font-afacad text-subtle-text leading-loose">
             Remember that feeling after casting your vote? That moment of
             &quot;I hope it makes it&quot;? Yeah, we weren&apos;t fans either.
             That&apos;s why we’re building something better.
@@ -123,7 +123,7 @@ const WaitListPage = () => {
 
       {/* Features Section */}
       <section className="flex flex-col items-center gap-16 lg:gap-28">
-        <h1 className="text-2xl md:text-3xl font-afacad font-bold text-center w-full md:w-[60%] lg:w-[40%]">
+        <h1 className="text-2xl md:text-3xl font-afacad font-bold text-center xl:text-4xl 2xl:text-5xl w-full md:w-[60%] lg:w-[40%] xl:w-[35%]">
           Your elections{" "}
           <span className="text-primary">secured, anywhere, anytime.</span>
         </h1>
@@ -137,10 +137,10 @@ const WaitListPage = () => {
           className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-between w-[70%] gap-8 lg:gap-0"
         >
           <div className="flex flex-col items-center lg:items-start gap-4 md:w-[70%] lg:w-[50%]">
-            <h1 className="text-xl lg:text-3xl font-afacad font-bold">
+            <h1 className="text-xl lg:text-3xl 2xl:text-4xl font-afacad font-bold">
               Bulletproof Security
             </h1>
-            <p className="text-subtle-text text-center lg:text-start font-afacad leading-loose">
+            <p className="text-subtle-text text-center lg:text-start xl:text-xl 2xl:text-2xl font-afacad leading-loose">
               Each vote is sealed with blockchain technology, making tampering
               impossible. Trust isn&#39;t promised – it&#39;s guaranteed.
             </p>
@@ -157,10 +157,10 @@ const WaitListPage = () => {
         >
           <Image src={lighting} alt="Lighting" className="w-24 lg:w-auto" />
           <div className="flex flex-col items-center lg:items-end gap-4 md:w-[70%] lg:w-[50%]">
-            <h1 className="text-xl lg:text-3xl font-afacad font-bold">
+            <h1 className="text-xl lg:text-3xl font-afacad font-bold 2xl:text-4xl">
               Real-Time Tracking
             </h1>
-            <p className="text-subtle-text text-center lg:text-end font-afacad leading-loose">
+            <p className="text-subtle-text text-center xl:text-xl  2xl:text-2xl lg:text-end font-afacad leading-loose">
               Watch results roll in live. Our blockchain tech guarantees every
               vote counts, securing a transparent and trustworthy election
               process.
@@ -178,10 +178,10 @@ const WaitListPage = () => {
           <Image src={eclipse} alt="eclipse" className="absolute left-0" />
           <div className="w-[70%] mx-auto flex flex-col lg:flex-row items-center lg:items-start lg:justify-between gap-8 lg:gap-0">
             <div className="flex flex-col items-center lg:items-start gap-4 md:w-[70%] lg:w-[50%]">
-              <h1 className="text-xl lg:text-3xl font-afacad font-bold">
+              <h1 className="text-xl lg:text-3xl font-afacad font-bold 2xl:text-4xl">
                 Voter Verification
               </h1>
-              <p className="text-subtle-text text-center lg:text-start font-afacad leading-loose">
+              <p className="text-subtle-text xl:text-xl  2xl:text-2xl text-center lg:text-start font-afacad leading-loose">
                 Import your voter list, send invitations, and let the system
                 handle verification. Democracy has never been this easy.
               </p>
@@ -205,11 +205,11 @@ const WaitListPage = () => {
           data-aos-once="false"
           className="flex flex-col items-center gap-4 lg:gap-6 w-full lg:w-[70%] xl:w-[50%]"
         >
-          <h1 className="text-xl lg:text-3xl w-[70%] font-afacad font-bold text-center">
+          <h1 className="text-xl lg:text-3xl 2xl:text-4xl w-[70%] font-afacad font-bold text-center">
             Ready to experience{" "}
             <span className="text-primary">the future of voting?</span>
           </h1>
-          <p className="text-center w-[70%] font-afacad text-subtle-text leading-loose">
+          <p className="text-center w-[70%] font-afacad text-subtle-text leading-loose xl:text-xl  2xl:text-2xl">
             Be one of the first to bring secure, modern elections to your
             organization or community. Drop your email below to get early access
             to our platform.
