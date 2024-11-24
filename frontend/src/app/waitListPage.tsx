@@ -88,7 +88,7 @@ const WaitListPage = () => {
             />
             <button
               type="submit"
-              className="bg-primary text-white w-full lg:w-[50%] font-afacad p-3 rounded-full mt-4 lg:mt-0 lg:ml-4 focus:outline-none hover:from-[#ffffff] hover:to-primary"
+              className="bg-primary hover:bg-chart-1 text-white w-full lg:w-[50%] font-afacad p-3 rounded-full mt-4 lg:mt-0 lg:ml-4 focus:outline-none hover:from-[#ffffff] hover:to-primary"
             >
               {loading ? (
                 <LoadingSpinner className="mx-auto sm:w-auto" />
@@ -229,7 +229,7 @@ const WaitListPage = () => {
             />
             <button
               type="submit"
-              className="bg-primary text-white w-full lg:w-[50%] font-afacad p-3 rounded-full mt-4 lg:mt-0 lg:ml-4 focus:outline-none hover:from-[#ffffff] hover:to-primary"
+              className="bg-primary hover:bg-chart-1 text-white w-full lg:w-[50%] font-afacad p-3 rounded-full mt-4 lg:mt-0 lg:ml-4 focus:outline-none hover:from-[#ffffff] hover:to-primary"
             >
               {loading ? (
                 <LoadingSpinner className="mx-auto sm:w-auto" />
