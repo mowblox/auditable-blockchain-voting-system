@@ -2,7 +2,8 @@
 import { useParams, usePathname } from "next/navigation";
 
 export default function SideBar() {
-  const { id } = useParams();
+  const params = useParams();
+  const id = params?.id as string | undefined;
   const pathname = usePathname();
 
   const infos = [
