@@ -1,5 +1,8 @@
+"use client";
+
 import { TrophyIcon, Home, ThumbsUp, Folder, UserPlus2 } from "lucide-react"
 import Image from 'next/image'
+import { usePathname } from 'next/navigation';
 
 import {
   Sidebar,
@@ -16,17 +19,17 @@ import {
 const items = [
   {
     title: "Home",
-    url: "/dashboard/home/",
+    url: "/dashboard/home",
     icon: Home,
   },
   {
     title: "Create election",
-    url: "#",
+    url: "/dashboard/create-election",
     icon: UserPlus2,
   },
   {
     title: "Election hub",
-    url: "#",
+    url: "/dashboard/elections",
     icon: TrophyIcon,
   },
   {
@@ -42,6 +45,8 @@ const items = [
 ]
 
 export function AppSidebar() {
+  const pathname = usePathname();
+
   return (
     <Sidebar>
       <SidebarHeader className="mt-6 pl-8">
@@ -53,9 +58,15 @@ export function AppSidebar() {
             <SidebarMenu className="gap-8">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="py-4 font-space-grotesk text-[20px]">
-                    <a href={item.url} className="hover:text-primary cursor-pointer">
-                      <item.icon/>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname === item.url}
+                  >
+                    <a
+                      href={item.url}
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg hover:text-primary text-l"
+                    >
+                      <item.icon />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
