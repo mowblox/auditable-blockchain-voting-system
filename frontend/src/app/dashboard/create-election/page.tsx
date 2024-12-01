@@ -4,11 +4,10 @@ import { AppSidebar } from "@/components/AppSideBar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
-import CreateElectionSection from "./createElection"; // Import the initial component
-import CandidatesSection from "../../../components/elections/AddCandidate"; // Import other sections
-import VotersSection from "../../../components/elections/VerifyVoter"; // Import other sections
-import SummarySection from "../../../components/elections/ElectionSummary"; // Import other sections
-import LinkSection from "../../../components/elections/VerifyVoter"; // Import other sections
+import CreateElectionSection from "./createElection";
+import CandidatesSection from "../../../components/elections/AddCandidate";
+import VotersSection from "../../../components/elections/VerifyVoter"; 
+import SummarySection from "../../../components/elections/ElectionSummary"; 
 
 export default function CreateElectionsNav() {
   const params = useParams();
@@ -23,7 +22,6 @@ export default function CreateElectionsNav() {
     { name: "Candidates", href: `/elections/${id}/candidates` },
     { name: "Voters", href: `/elections/${id}/voters` },
     { name: "Summary", href: `/elections/${id}/summary` },
-    { name: "Link", href: `/elections/${id}/link` },
   ];
 
   // Function to handle tab click and update the active tab
@@ -34,7 +32,6 @@ export default function CreateElectionsNav() {
   return (
     <>
       <SidebarProvider>
-        <AppSidebar />
         <SidebarInset>
           {/* Render the tab navigation */}
           <div className="tabs-container  px-4">
@@ -59,7 +56,6 @@ export default function CreateElectionsNav() {
             {activeTab === "Candidates" && <CandidatesSection />}
             {activeTab === "Voters" && <VotersSection />}
             {activeTab === "Summary" && <SummarySection />}
-            {activeTab === "Link" && <LinkSection />}
           </div>
         </SidebarInset>
       </SidebarProvider>

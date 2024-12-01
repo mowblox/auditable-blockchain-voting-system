@@ -15,7 +15,7 @@
 }
 select:focus {
   transition: background-color 0.3s ease-in-out;
-  background-color: #1B1A23; /* bg-dark */
+  background-color: #1b1a23; /* bg-dark */
 }
 @layer base {
   :root {
@@ -35,8 +35,7 @@ select:focus {
     --accent-foreground: 219, 72%, 44%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --success: 120, 60%, 40%
-    --success-foreground: 120, 60%, 90%;
+    --success: 120, 60%, 40% --success-foreground: 120, 60%, 90%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
@@ -100,37 +99,48 @@ select:focus {
 }
 
 .PopoverContent {
-	animation-duration: 0.6s;
-	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 .PopoverContent[data-side="top"] {
-	animation-name: slideUp;
+  animation-name: slideUp;
 }
 .PopoverContent[data-side="bottom"] {
-	animation-name: slideDown;
+  animation-name: slideDown;
 }
 
 @keyframes slideDown {
-	from {
-		opacity: 0;
-		transform: translateY(-10px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideUp {
-	from {
-		opacity: 0;
-		transform: translateY(10px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-
-@layer components { .loader { @apply w-12 aspect-square rounded-full border-8 border-none border-r-[#ffa50097] relative animate-l24; } .loader:before, .loader:after { content: ""; @apply absolute inset-[-8px] rounded-full animate-l24Slow; } .loader:after { @apply animate-l24Slower; } }
+@layer components {
+  .loader {
+    @apply w-12 aspect-square rounded-full border-8 border-none border-r-[#ffa50097] relative animate-l24;
+  }
+  .loader:before,
+  .loader:after {
+    content: "";
+    @apply absolute inset-[-8px] rounded-full animate-l24Slow;
+  }
+  .loader:after {
+    @apply animate-l24Slower;
+  }
+}

@@ -22,7 +22,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AppSidebar } from "@/components/AppSideBar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { motion } from "framer-motion";
 
@@ -93,7 +92,6 @@ export default function AllElections() {
 
   return (
     <SidebarProvider>
-      <AppSidebar />
       <SidebarInset>
         <div className="flex flex-col gap-5 w-full py-4 px-16">
           <motion.div

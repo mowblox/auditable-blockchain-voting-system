@@ -1,11 +1,12 @@
 "use client";
 
-import { AppSidebar } from "@/components/AppSideBar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Trophy, ThumbsUp, DotIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
+  const router = useRouter();
   const data = [
     {
       election: "SRC President 2024",
@@ -59,9 +60,10 @@ const Home = () => {
     hover: { scale: 1.05 },
   };
 
+  
+
   return (
     <SidebarProvider>
-      <AppSidebar />
       <SidebarInset className="bg-transparent">
         <motion.div
           initial="hidden"
@@ -120,7 +122,7 @@ const Home = () => {
               <div className="flex justify-end w-full">
                 <motion.button
                   variants={buttonHover}
-                  whileHover="hover"
+                  onClick={() => router.push(`/elections/1/verify`)}
                   className="px-4 w-fit py-2 bg-primary rounded-2xl hover:bg-chart-1"
                 >
                   Cast Vote
@@ -194,9 +196,9 @@ const Home = () => {
                         <motion.button
                           variants={buttonHover}
                           whileHover="hover"
-                          className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600"
+                          className="px-4 py-2 rounded bg-blue-500 text-[#4C9FE4] hover:bg-blue-600"
                         >
-                          View Results
+                          view results
                         </motion.button>
                       </td>
                     </motion.tr>

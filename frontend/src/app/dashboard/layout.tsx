@@ -6,7 +6,7 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
+      <main className='w-full'>
         <SidebarTrigger />
         {children}
       </main>

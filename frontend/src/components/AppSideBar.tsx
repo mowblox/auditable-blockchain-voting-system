@@ -55,10 +55,11 @@ export function AppSidebar() {
       <SidebarContent className="pl-5">
         <SidebarGroup>
           <SidebarGroupContent className="mt-2">
-            <SidebarMenu className="gap-8">
+            <SidebarMenu className="gap-4">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
+                    className="flex items-center rounded-xl px-4 py-6 selected:text-primary"
                     asChild
                     isActive={pathname === item.url}
                   >
