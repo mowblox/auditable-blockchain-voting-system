@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Space_Grotesk, Roboto_Flex } from "next/font/google";
+import { Space_Grotesk, Roboto_Flex, Afacad } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import WalletProvider from "@/components/WalletProvider";
@@ -13,6 +13,10 @@ const space_grotesk = Space_Grotesk({
 const roboto_flex = Roboto_Flex({
   subsets: ["latin"],
   variable: "--font-roboto-flex",
+});
+const afacad = Afacad({
+  subsets: ["latin"],
+  variable: "--font-afacad",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${space_grotesk.variable} ${roboto_flex.variable}`}
+      className={`${space_grotesk.variable} ${roboto_flex.variable} ${afacad.variable}`}
     >
       <body className="bg-dark">
         <ThemeProvider attribute="class" defaultTheme="dark">

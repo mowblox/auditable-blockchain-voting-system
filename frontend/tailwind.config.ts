@@ -19,9 +19,19 @@ const config: Config = {
   	fontFamily: {
   		sans: ["var(--font-roboto-flex)"],
   		'space-grotesk': ["var(--font-space-grotesk)"],
-  		'roboto-flex': ["var(--font-roboto-flex)"]
+  		'roboto-flex': ["var(--font-roboto-flex)"],
+      "afacad": ["var(--font-afacad)"],
   	},
   	extend: {
+      screens: {
+        'xs': "320px",
+        'sm': "640px",
+        'md': "768px",
+        'lg': "1280px",
+        'xl': '1440px',
+        '2xl': '1920px',
+        '3xl': '3840px',
+      },
   		keyframes: {
   			l24: {
   				'100%': {

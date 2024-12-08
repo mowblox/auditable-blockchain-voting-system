@@ -54,7 +54,7 @@ export function AppSidebar() {
         </SidebarHeader>
       <SidebarContent className="pl-5">
         <SidebarGroup>
-          <SidebarGroupContent className="mt-2">
+          <SidebarGroupContent className="mt-10">
             <SidebarMenu className="gap-4">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>

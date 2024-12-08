@@ -1,15 +1,15 @@
 import { Metadata } from "next";
-import LandingContent from "./landingPage";
 import Footer from "@/components/Footer";
+import WaitListPage from "./waitListPage";
 
 export const metadata: Metadata = {
-  title: "ABVS | Landing",
+  title: "TrueCast | Landing",
 };
 
 export default function LandingPage() {
   return (
     <>
-      <LandingContent />
+      <WaitListPage />
       <Footer />
     </>
   );
